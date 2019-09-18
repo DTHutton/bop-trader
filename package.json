@@ -1,0 +1,21 @@
+{
+  "name": "project_two_TAD",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DTHutton/project_two_TAD.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DTHutton/project_two_TAD/issues"
+  },
+  "homepage": "https://github.com/DTHutton/project_two_TAD#readme"
+}
