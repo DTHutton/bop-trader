@@ -19,13 +19,13 @@ Users create an account and are initially provided a set amount of money to use 
 
 ## Credits
 * Austin Alber
-    ** Database Deity
-    ** Snacks
+    * Database Deity
+    * Snacks
 
 * Thomas White
-    ** Logic Lord
-    ** Security
+    * Logic Lord
+    * Security
     
 * Derek Hutton
-    ** Admiral Asthetic
-    ** General Unhelpfulness
+    * Admiral Asthetic
+    * General Unhelpfulness
