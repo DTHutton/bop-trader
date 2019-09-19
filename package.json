@@ -1,28 +1,30 @@
 {
-  "name": "project_two_TAD",
+  "name": "node-handlebars-boilerplate",
   "version": "1.0.0",
-  "description": "",
+  "description": "Project 2 Starter",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "lint": "eslint --quiet .",
+    "fix": "eslint --fix .",
+    "test": "npm run lint && cross-env NODE_ENV=test mocha -u tdd --reporter spec --exit"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/DTHutton/project_two_TAD.git"
-  },
-  "keywords": [],
-  "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/DTHutton/project_two_TAD/issues"
-  },
-  "homepage": "https://github.com/DTHutton/project_two_TAD#readme",
   "dependencies": {
-    "dotenv": "^8.1.0",
-    "express": "^4.17.1",
-    "mysql": "^2.17.1",
-    "mysql2": "^1.7.0",
-    "sequelize": "^5.18.4"
+    "dotenv": "^8.0.0",
+    "express": "^4.17.0",
+    "express-handlebars": "^3.1.0",
+    "mysql2": "^1.6.5",
+    "sequelize": "^5.8.6"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "cross-env": "^5.2.0",
+    "eslint": "^5.16.0",
+    "eslint-config-prettier": "^4.3.0",
+    "eslint-plugin-prettier": "^3.1.0",
+    "mocha": "^6.1.4",
+    "prettier": "^1.17.1"
   }
 }
