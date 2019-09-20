@@ -12,8 +12,9 @@
   "license": "ISC",
   "dependencies": {
     "dotenv": "^8.0.0",
-    "express": "^4.17.0",
+    "express": "^4.17.1",
     "express-handlebars": "^3.1.0",
+    "mysql": "^2.17.1",
     "mysql2": "^1.6.5",
     "sequelize": "^5.8.6"
   },
@@ -26,5 +27,18 @@
     "eslint-plugin-prettier": "^3.1.0",
     "mocha": "^6.1.4",
     "prettier": "^1.17.1"
-  }
+  },
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DTHutton/project_two_TAD.git"
+  },
+  "keywords": [],
+  "author": "",
+  "bugs": {
+    "url": "https://github.com/DTHutton/project_two_TAD/issues"
+  },
+  "homepage": "https://github.com/DTHutton/project_two_TAD#readme"
 }
