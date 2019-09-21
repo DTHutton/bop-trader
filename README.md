@@ -27,5 +27,5 @@ Users create an account and are initially provided a set amount of money to use 
     * Security
     
 * Derek Hutton
-    * Admiral Asthetic
+    * Admiral Aesthetic
     * General Unhelpfulness
