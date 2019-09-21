@@ -29,3 +29,30 @@ Users create an account and are initially provided a set amount of money to use 
 * Derek Hutton
     * Admiral Aesthetic
     * General Unhelpfulness
+
+
+
+# page layouts test
+
+## home 
+
+## trading
+
+## account creation
+
+## profile
+* trade history
+	* total income/loss
+		* time frame for this?
+* current stock held
+* current buying power
+* veiw friend progress
+	* cool idea, but I think we should icebox it until MVP is done
+
+## all 
+* links to other pages
+* header
+    * current market value 
+* footer
+
+	
