@@ -18,14 +18,14 @@ Users create an account and are initially provided a set amount of money to use 
 * [Mysql](https://www.npmjs.com/package/mysql)
 
 ## Credits
-* Austin Alber
+* [Austin Alber](https://github.com/austinalber)
     * Database Deity
     * Snacks
 
-* Thomas White
+* [Thomas White](https://github.com/thomas-white-ucf)
     * Logic Lord
     * Security
     
-* Derek Hutton
+* [Derek Hutton](https://github.com/DTHutton)
     * Admiral Aesthetic
     * General Unhelpfulness
