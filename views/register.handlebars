@@ -1,33 +1,77 @@
-<div id="home">
-  <div class="container">
-    <div class="row">
-      <div class="col-8 offset-2">
-        <h1>{{msg}}</h1>
-        <h2>This is our Home Page!</h2>
-        <form class="clearfix mb-4" action="POST">
-          <div class="form-group">
-            <label for="example-text">Example Text</label>
-            <input type="text" id="example-text" class="form-control" aria-describedby="example-text" placeholder="Enter Example Text">
-          </div>
-          <div class="form-group">
-            <label for="example-description">Example Description</label>
-            <textarea class="form-control" id="example-description" aria-describedby="example-description" placeholder="Enter Example Description"></textarea>
-          </div>
-          <button id="submit" class="btn btn-primary float-right">Submit</button>
-        </form>
-        <h3>Examples:</h3>
-        <ul id="example-list" class="list-group">
-          {{#each examples}}
-          <li data-id="{{this.id}}" class="list-group-item">
-            <a href="example/{{this.id}}">{{this.text}}</a>
-            <button class="btn btn-danger float-right delete">ｘ</button>
-          </li>
-          {{/each}}
-        </ul>
-      </div>
+
+<div class="row mt-5">
+  <div class="col-md-6 m-auto">
+    <div class="card card-body">
+      {{!-- header with icon --}}
+      <h1 class="text-center mb-3"><i class="fas fa-user-plus"></i> Register</h1>
+      {{!-- partial messages --}}
+      {{> messages}}
+      <form action="/register" method="POST">
+        <div class="form-group">
+          <label for="name">Email</label>
+          <input
+            type="name"
+            id="name"
+            name="name"
+            class="form-control"
+            placeholder="Enter Name"
+            {{!-- value="{{ name != 'undefined' ? name : ''" --}}
+
+            {{!-- CONVERT >> need to convert this VALUE FROM EJS > Handlebars --}}
+            {{!-- if there is bad entered name, keep what was entered in there still (dont clear form) --}}
+          />
+        </div>
+        <div class="form-group">
+          <label for="email">Confirm Email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            class="form-control"
+            placeholder="Enter Email"
+            
+            {{!-- CONVERT >> need to convert this VALUE FROM EJS > Handlebars --}}
+            {{!-- if there is bad entered name, keep what was entered in there still (dont clear form) --}}
+            {{!-- value="{{= typeof email != 'undefined' ? email : '' " --}}
+          />
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            class="form-control"
+            placeholder="Create Password"
+
+            {{!-- CONVERT >> need to convert this VALUE FROM EJS > Handlebars --}}
+            {{!-- if there is bad entered name, keep what was entered in there still (dont clear form) --}}
+            {{!-- value="{{= typeof password != 'undefined' ? password : '' " --}}
+          />
+        </div>
+        <div class="form-group">
+          <label for="password2">Confirm Password</label>
+          <input
+            type="password"
+            id="password2"
+            name="password2"
+            class="form-control"
+            placeholder="Confirm Password"
+
+            {{!-- CONVERT >> need to convert this VALUE FROM EJS > Handlebars --}}
+            {{!-- if there is bad entered name, keep what was entered in there still (dont clear form) --}}
+            {{!-- value="{{= typeof password2 != 'undefined' ? password2 : '' " --}}
+          />
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Register
+        </button>
+      </form>
+      <p class="lead mt-4">Have An Account? <a href="/login">Login</a></p>
     </div>
   </div>
 </div>
 
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="/js/index.js"></script>
+
+ {{!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="/js/register.js"></script>  --}}
+

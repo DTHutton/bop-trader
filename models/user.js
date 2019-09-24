@@ -2,7 +2,7 @@ module.exports = function(sequelize, DataTypes) {
   var User = sequelize.define("User", {
     userFirstName: {
       type: DataTypes.STRING,
-      // required: true,
+      required: true,
       allowNull: false,
       validate: {
         len: [1, 30]
@@ -10,7 +10,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     userLastName: {
       type: DataTypes.STRING,
-      // required: true,
+      required: true,
       allowNull: false,
       validate: {
         len: [1, 30]
@@ -18,7 +18,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     userPassword: {
       type: DataTypes.STRING,
-      // required: true,
+      required: true,
       allowNull: false,
       validate: {
         len: [1, 30]
@@ -26,7 +26,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     date: {
       type: DataTypes.DATEONLY,
-      // required: true,
+      required: true,
       allowNull: false,
       defaultValue: new Date()
     }
