@@ -1,6 +1,11 @@
 <h1 class="mt-4">Dashboard</h1>
-<p class="lead mb-3">Welcome 
+<p class="lead mb-3">Welcome {{user.name}}
+    {{!-- or is it just name --}}
     {{!-- <%= user.name %> --}}
     {{!-- Once you are logged in and set up passport we will have access to user object and fields in our database --}}
+
 </p>
-<a href="/users/logout" class="btn btn-secondary">Logout</a>
+<a href="/logout" class="btn btn-secondary">Logout</a>
+
+
+
