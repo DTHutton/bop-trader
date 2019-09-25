@@ -6,8 +6,11 @@ USE sjro560knhmtbjsf;
 CREATE TABLE BOP_TABLE
 (
   id int NOT NULL AUTO_INCREMENT,
-  burger_name varchar(100) NOT NULL,
-  devoured BOOLEAN DEFAULT false,
-  createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  name varchar(100) NOT NULL,
+  email varchar(100) NOT NULL,
+  password varchar(100) NOT NULL,
+  password2 varchar(100) NOT NULL
+  -- ,
+  -- createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (id)
 );
