@@ -73,7 +73,7 @@ module.exports = function(app) {
 	// register user, validate form input, show user partials messG
 	app.post('/register', (req, res) => {
 		console.log(req.body);
-		res.send('hello, post route was hit A-okay');
+		// res.send('hello, post route was hit A-okay');
 		// destructuring req.body
 		const { name, email, password, password2 } = req.body
 
@@ -93,6 +93,7 @@ module.exports = function(app) {
 		}
 		if(errors.length > 0) {
 			// render the register html again with wrongly entered data so User can correct entry
+			console.log("errors = ", errors)
 			res.render("register", {
 				errors,
 				name,
@@ -101,8 +102,8 @@ module.exports = function(app) {
 				password2
 			});
 		} else {
-			res.send("validation pass");
-			db.user.findAll({ email: email})
+			// res.send("validation pass");
+			db.User.findAll({ email: email})
 			.then( user => {
 				if(user) {
 					// User exists
@@ -120,13 +121,12 @@ module.exports = function(app) {
 						email,
 						password
 					});
-					console.log("new user");
-					res.send("hello");
+					console.log("new user created");
+					// res.send("hello");
 				}
 			})
 
 		}
-		console.log("errors = ", errors)
 
 	});
 
@@ -140,10 +140,8 @@ module.exports = function(app) {
 	// });
 
 	// Render 404 page for any unmatched routes
+	// -  No set route defined, display default page
 	app.get('*', function(req, res) {
 		res.render('404');
-		// -  No set route defined, display default page
 	});
 };
-
-// youtube video exported module.exports = router; >>> I should prolly convert all router to app.

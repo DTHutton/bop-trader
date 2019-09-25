@@ -18,7 +18,7 @@ require("./config/passport")(passport);
 // FALSE = enables us to get info from our form with req.body
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-app.use(express.static("public"));
+app.use(express.static(__dirname + "public"));
 
 // express-session Middleware
 app.use(session({
@@ -59,9 +59,6 @@ require("./routes/apiRoutes")(app);
 require("./routes/htmlRoutes")(app);
 // require("./routes/index")(app);
 // require("./routes/users")(app);
-
-// Passport video attempt to make home page route as youtube guide had it
-// app.use('/', require('./routes/index'));
 
 const syncOptions = { force: false };
 

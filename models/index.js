@@ -10,7 +10,7 @@ const db        = {};
 
 // if database is deployed, use JAWSDB_URL from config.use_env_variable
 if (config.use_env_variable) {
-  console.log("JAWSDB_URL connected.")
+  console.log("JAWSDB_URL connected.");
 
   var sequelize = new Sequelize(process.env[config.use_env_variable]);
 
