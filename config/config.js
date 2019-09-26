@@ -9,6 +9,14 @@ module.exports = {
     "host": process.env.DB_HOST,
     "dialect": "mysql"
   },
+  // "test": {
+  //   "username": "q3nvs59j5k507fhx",
+  //   "password": "vz20v2f30a5w0657",
+  //   "database": "sjro560knhmtbjsf",
+  //   "host": "ko86t9azcob3a2f9.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
+  //   "dialect": "mysql",
+  //   "logging": false
+  // },
   "test": {
     "username": "root",
     "password": "SQLsetpass774$",

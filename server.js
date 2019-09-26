@@ -18,15 +18,13 @@ require("./config/passport")(passport);
 // FALSE = enables us to get info from our form with req.body
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-app.use(express.static(__dirname + "public"));
+// app.use(express.static(__dirname + "public"));
+app.use(express.static("public"));
+
 
 // express-session Middleware
-app.use(session({
-  secret: 'secret',
-  resave: true,
-  saveUninitialized: true
-  // ,
-  // cookie: { secure: true }
+app.use(session({ secret: 'secret', resave: true, saveUninitialized: true
+  // , cookie: { secure: true }
 }));
 
 // Passport Middleware
@@ -36,7 +34,7 @@ app.use(passport.session());
 // Connect Flash
 app.use(flash());
 
-// Global Vars (for text colors .. from youtube vid...)
+// Global Vars (for text colors .. from youtube vid...) . ( for flash )
 // custom middleware for success and error messages while registering/logging in
 app.use((req, res, next) => {
   res.locals.success_msg = req.flash("success_msg");
@@ -71,11 +69,7 @@ if (process.env.NODE_ENV === "test") {
 // Starting the server, syncing our models ------------------------------------/
 db.sequelize.sync(syncOptions).then(function () {
   app.listen(PORT, function () {
-    console.log(
-      "==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.",
-      PORT,
-      PORT
-    );
+    console.log("==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.", PORT, PORT);
   });
 });
 

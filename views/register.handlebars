@@ -3,75 +3,41 @@
   <div class="col-md-6 m-auto">
     <div class="card card-body">
       {{!-- header with icon --}}
-      <h1 class="text-center mb-3"><i class="fas fa-user-plus"></i> Register</h1>
-      {{!-- partial messages --}}
+      {{!-- Register on BoP -- MSG from route  --}}
+      <h1 class="text-center mb-3"><i class="fas fa-user-plus"></i> {{msg}}</h1>
+
+      {{!-- messages partial --}}
       {{> messages}}
+
       <form action="/register" method="POST">
         <div class="form-group">
           <label for="name">Email</label>
-          <input
-            type="name"
-            id="name"
-            name="name"
-            class="form-control"
-            placeholder="Enter Name"
-            value="{{name}}"
-
-            {{!-- CONVERT >> need to convert this VALUE FROM EJS > Handlebars --}}
+          <input type="name" id="name" name="name" class="form-control" 
+          placeholder="Enter Name" 
+          value="{{name}}"
             {{!-- if there is bad entered name, keep what was entered in there still (dont clear form) --}}
           />
         </div>
         <div class="form-group">
           <label for="email">Confirm Email</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            class="form-control"
-            placeholder="Enter Email"
-            
-            {{!-- CONVERT >> need to convert this VALUE FROM EJS > Handlebars --}}
-            {{!-- if there is bad entered name, keep what was entered in there still (dont clear form) --}}
-            {{!-- value="{{= typeof email != 'undefined' ? email : '' " --}}
-          />
+          <input type="email" id="email" name="email" class="form-control" placeholder="Enter Email" />
         </div>
         <div class="form-group">
           <label for="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            class="form-control"
-            placeholder="Create Password"
-
-            {{!-- CONVERT >> need to convert this VALUE FROM EJS > Handlebars --}}
-            {{!-- if there is bad entered name, keep what was entered in there still (dont clear form) --}}
-            {{!-- value="{{= typeof password != 'undefined' ? password : '' " --}}
-          />
+          <input type="password" id="password" name="password" class="form-control" placeholder="Create Password" />
         </div>
         <div class="form-group">
           <label for="password2">Confirm Password</label>
-          <input
-            type="password"
-            id="password2"
-            name="password2"
-            class="form-control"
-            placeholder="Confirm Password"
-
-            {{!-- CONVERT >> need to convert this VALUE FROM EJS > Handlebars --}}
-            {{!-- if there is bad entered name, keep what was entered in there still (dont clear form) --}}
-            {{!-- value="{{= typeof password2 != 'undefined' ? password2 : '' " --}}
-          />
+          <input type="password" id="password2" name="password2" class="form-control" placeholder="Confirm Password" />
         </div>
-        <button type="submit" class="btn btn-primary btn-block">Register
+        {{!-- SUBMIT BUTTON --}}
+        <button type="submit" id="submit" class="btn btn-primary btn-block">Register
         </button>
       </form>
+      {{!--  Link to Login page --}}
       <p class="lead mt-4">Have An Account? <a href="/login">Login</a></p>
     </div>
   </div>
 </div>
 
-
- {{!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="/js/register.js"></script>  --}}
 
