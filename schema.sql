@@ -1,5 +1,8 @@
 -- DROP DATABASE IF EXISTS bop_db;
 -- CREATE DATABASE bop_db;
 
--- DROP DATABASE IF EXISTS bop_db;
--- CREATE DATABASE bop_db;
+DROP DATABASE IF EXISTS bop_db;
+CREATE DATABASE bop_db;
+
+
+-- SELECT * FROM `bop_db`.`Users` LIMIT 1000;

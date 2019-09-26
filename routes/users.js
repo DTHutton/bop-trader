@@ -1,6 +1,8 @@
 // user/login or user/register route
 
-// {
+// var bcrypt = require("bcryptjs");
+// // 
+// module.exports = {
 
 // bcrypt.genSalt(10, (err, salt) => 
 //     bcrypt.hash(newUser.password, salt, (err,hash) => {
@@ -11,7 +13,7 @@
 //         newUser.save()
 //             .then(user => {
 //                 requestAnimationFrame.flash("success_msg", "You are now registered and can log in");
-//                 res.redirect("/users/login");
+//                 res.redirect("/login");
 //         })
 //         .catch(err => console.log(err));
 

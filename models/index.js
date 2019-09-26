@@ -11,11 +11,8 @@ const db        = {};
 // if database is deployed, use JAWSDB_URL from config.use_env_variable
 if (config.use_env_variable) {
   console.log("JAWSDB_URL connected.");
-
   var sequelize = new Sequelize(process.env[config.use_env_variable]);
-
   // should there be an additional parameter >      , config  ^ ^ 
-  
 } else { 
   // else, use Local database
   console.log("local database connected.")
@@ -26,6 +23,10 @@ if (config.use_env_variable) {
     config
   );
 }
+
+// We can also optionally specify a database to be used for testing if we want.
+
+// Then it goes through every other JavaScript file inside our models folder and runs them through Sequelize. It gives our models all of Sequelize’s helper methods and makes sure that all of the associations between models are properly set up. It exports an object we will use to interface with Sequelize in our other files.
 
 fs.readdirSync(__dirname)
   .filter(function (file) {
