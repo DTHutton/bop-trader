@@ -1,6 +1,11 @@
 var db = require("../models");
 
 module.exports = function(app) {
+  // Get FUSION CHARTS
+  app.get("/api/fusioncharts", function(req, res) {
+    res.render("fusioncharts");
+  });
+
   // Get all users
   app.get("/api/users", function(req, res) {
     db.User.findAll({}).then(function(dbUser) {

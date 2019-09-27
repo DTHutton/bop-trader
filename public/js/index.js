@@ -13,7 +13,7 @@ $(document).ready(function() {
           "Content-Type": "application/json"
         },
         type: "POST",
-        url: "api/examples",
+        url: "/register",
         data: JSON.stringify(user)
       });
     },
@@ -65,7 +65,7 @@ $(document).ready(function() {
   var handleFormSubmit = function(event) {
     event.preventDefault();
     console.log("handleFormSubmit HIT on @ register.js public file");
-
+    // NEED TO CHANGE NAMES TO MATCH
     const user = {
       username: $("#name")
         .val()
@@ -88,9 +88,7 @@ $(document).ready(function() {
       return;
     }
 
-    API.saveExample(user).then(function() {
-      refreshExamples();
-    });
+    API.saveExample(user);
 
     $("#name").val("");
     $("#email").val("");

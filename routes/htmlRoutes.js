@@ -12,7 +12,7 @@ module.exports = function(app) {
   app.get("/", function(req, res) {
     db.Example.findAll({}).then(function(dbExamples) {
       // changed index to welcome for now
-      console.log("hello");
+      // console.log("hello");
       res.render("welcome", {
         msg: "Welcome!",
         examples: dbExamples
@@ -20,7 +20,7 @@ module.exports = function(app) {
     });
   });
 
-  // REGISTER TEST PAGE ROUTE/logic
+  // REGISTER GET ROUTE/logic
   app.get("/register", function(req, res) {
     res.render("register", {
       msg: "Register on BoP"
@@ -29,6 +29,71 @@ module.exports = function(app) {
     // 	example: dbExample
     // });
     // res.send("register ger route hit . ")
+  });
+
+  // REGISTER POST user, validate form input, show user partials mesG
+  app.post("/register", (req, res) => {
+    console.log(req.body);
+    // res.send('hello, post route was hit A-okay');
+    // destructuring req.body
+    const { username, email, password, password2 } = req.body;
+
+    const errors = [];
+
+    // Check required fields >
+    if (!username || !email || !password || !password2) {
+      errors.push({ msg: "Please fill in all fields" });
+    }
+    // Check passwords match
+    if (password !== password2) {
+      errors.push({ msg: "Passwords do not match" });
+    }
+    // Check pass length < 6
+    if (password.length < 6) {
+      errors.push({ msg: "Password must be at least 6 characters" });
+    }
+    if (errors.length > 0) {
+      // render the register html again with wrongly entered data so User can correct entry
+      console.log("errors = ", errors);
+      res.render("register", {
+        errors,
+        name,
+        email,
+        password,
+        password2
+      });
+    } else {
+      console.log(
+        "NO FORM ENTER ERRORS, Now, check if that user already exists\n"
+      );
+      // res.send("validation pass");
+      db.User.findAll({ email: email }).then(user => {
+        if (user.length) {
+          console.log(user);
+          console.log(
+            "\n then function ... if user already exists,  re-render the page with erros and pervious entered info \n"
+          );
+          // User exists
+          errors.push({ msg: "Email is already registered" });
+          res.render("register", {
+            errors,
+            username,
+            email,
+            password,
+            password2
+          });
+        } else {
+          console.log("new user created");
+          const newUser = new db.User({
+            username,
+            email,
+            password
+          });
+          console.log("new user created, user = ", newUser);
+          res.render("dashboard");
+        }
+      });
+    }
   });
 
   app.get("/login", (req, res, next) => {
@@ -63,70 +128,6 @@ module.exports = function(app) {
     res.render("dashboard", {
       name: req.user.name
     });
-  });
-
-  // register user, validate form input, show user partials mesG
-  app.post("/register", (req, res) => {
-    console.log(req.body);
-    // res.send('hello, post route was hit A-okay');
-    // destructuring req.body
-    const { name, email, password, password2 } = req.body;
-
-    const errors = [];
-
-    // Check required fields >
-    if (!name || !email || !password || !password2) {
-      errors.push({ msg: "Please fill in all fields" });
-    }
-    // Check passwords match
-    if (password !== password2) {
-      errors.push({ msg: "Passwords do not match" });
-    }
-    // Check pass length < 6
-    if (password.length < 6) {
-      errors.push({ msg: "Password must be at least 6 characters" });
-    }
-    if (errors.length > 0) {
-      // render the register html again with wrongly entered data so User can correct entry
-      console.log("errors = ", errors);
-      res.render("register", {
-        errors,
-        name,
-        email,
-        password,
-        password2
-      });
-    } else {
-      console.log(
-        "NO FORM ENTER ERRORS, Now, check if that user already exists\n"
-      );
-      // res.send("validation pass");
-      db.User.findAll({ email: email }).then(user => {
-        if (user) {
-          console.log(
-            "\n then function ... if user already exists,  re-render the page with erros and pervious entered info \n"
-          );
-          // User exists
-          errors.push({ msg: "Email is already registered" });
-          res.render("register", {
-            errors,
-            name,
-            email,
-            password,
-            password2
-          });
-        } else {
-          console.log("new user created");
-          const newUser = new User({
-            name,
-            email,
-            password
-          });
-          console.log("new user created, user = ", newUser);
-          res.render("dashboard");
-        }
-      });
-    }
   });
 
   // Render 404 page for any unmatched routes

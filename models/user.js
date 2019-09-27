@@ -7,6 +7,8 @@
 
 module.exports = function(sequelize, DataTypes) {
   var User = sequelize.define("User", {
+    // CHANGE NAMES , REMOVE DOUBLE EMAIL, ADD OTHER COLUMN HEADERS
+    // ADD HEADER TO START WITH $100,000, 0 btc, 0 ltc, 0 eth
     userFirstName: {
       type: DataTypes.STRING,
       required: true,
