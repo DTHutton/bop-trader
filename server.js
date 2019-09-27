@@ -60,8 +60,8 @@ app.set("view engine", "handlebars");
 // Routes
 require("./routes/apiRoutes")(app);
 require("./routes/htmlRoutes")(app);
+require("./routes/users")(app);
 // require("./routes/index")(app);
-// require("./routes/users")(app);
 
 const syncOptions = { force: false };
 

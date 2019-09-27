@@ -1,6 +1,17 @@
 var db = require("../models");
 
 module.exports = function(app) {
+  // POST route for saving a newUser
+  // app.post("/api/posts", function(req, res) {
+  //   console.log("/api/posts  HIT >> req.body = ", req.body);
+  // db.User.create({
+  //   email: req.body.email,
+  //   password: req.body.password
+  // }).then(function(newUser) {
+  //   res.json(newUser);
+  // });
+  // });
+
   // Get FUSION CHARTS
   app.get("/api/fusioncharts", function(req, res) {
     res.render("fusioncharts");
