@@ -3,7 +3,7 @@ const passport = require("passport");
 
 module.exports = function(app) {
   // GET FUSION CHARTS
-  app.get("/api/fusioncharts", passport.authenticate("local"), function(req, res) {
+  app.get("/api/fusioncharts", function(req, res) {
     res.render("fusioncharts");
   });
 
