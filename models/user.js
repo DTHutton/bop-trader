@@ -30,7 +30,7 @@ module.exports = function(sequelize, DataTypes) {
       required: true,
       allowNull: false,
       validate: {
-        len: [1, 30]
+        len: [1, 60]
       }
     },
     cash: {

@@ -1,4 +1,5 @@
 var db = require("../models");
+var bcrypt = require("bcryptjs");
 
 module.exports = function(app) {
   // POST route for saving a newUser
