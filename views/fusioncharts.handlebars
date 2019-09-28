@@ -1,29 +1,3 @@
-<h2> Bitcoin Ticker</h2>
-<nav class="navbar navbar-dark">
-    <h1 class="logo pl-2">Real-Time Cryptocurrency</h1>
-</nav>
-<div class="container-fluid">
-    <div class="row text-center mt-4 pl-3 pr-3">
-        <div class="col-sm">
-            <div class="card">
-                <div class="card-body">
-                    <div class="h3">Bitcoin(BTC)</div>
-                    <div class="h5">(Price in USD)</div>
-                    <div id="btc_val" class="h4 kpi-value"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    {{!-- <div class="row mt-4 pr-3 pl-3">
-        <div class="col">
-            <div class="card">
-                <div class="card-body">
-                    <div id="chart-container"></div>
-                </div>
-            </div>
-        </div>
-    </div> --}}
 
     <section class="graph-carousel">
         <div class="bd-example">
@@ -67,9 +41,6 @@
             </div>
         </div>
     </section>
-
-
-</div>
 ​
 <!-- FusionCharts' style files -->
 <link rel="stylesheet" src="https://ds.fusioncharts.com/2.0.8/css/ds.css">
@@ -82,47 +53,6 @@
     src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.fusion.js"></script>
 <!-- JavaScript Section: -->
 <script>
-    //Fetch the value of Bitcoin
-    const api_url = 'https://api.cryptonator.com/api/ticker/btc-usd';
-    // Log initial price at page loadup
-    console.log(bitcoinDataHandler().toString());
-    const time_interval = 2;
-    function addLeadingZero(num) {
-        return (num <= 9) ? ("0" + num) : num;
-    }
-    function clientDateTime() {
-        var date_time = new Date();
-        var curr_hour = date_time.getHours();
-        var zero_added_curr_hour = addLeadingZero(curr_hour);
-        var curr_min = date_time.getMinutes();
-        var curr_sec = date_time.getSeconds();
-        var curr_time = zero_added_curr_hour + ':' + curr_min + ':' + curr_sec;
-        return curr_time
-    }
-    function makeHttpObject() {
-        try { return new XMLHttpRequest(); }
-        catch (error) { }
-    }
-    function bitcoinGetData() {
-        var request = makeHttpObject();
-        request.open("GET", api_url, false);
-        request.send(null);
-        return request.responseText;
-    }
-    function bitcoinDataHandler() {
-        var raw_data_string = bitcoinGetData();
-        var data = JSON.parse(raw_data_string);
-        var base = data.ticker.base;
-        var target = data.ticker.target;
-        var price = data.ticker.price;
-        var volume = data.ticker.volume;
-        var change = data.ticker.change;
-        var api_server_epoch_timestamp = data.timestamp;
-        var api_success = data.success;
-        var api_error = data.error;
-        return price;
-    }
-    document.getElementById("btc_val").innerHTML = "$" + Math.round(bitcoinDataHandler());
     // Create Chart
     FusionCharts.ready(function () {
         var fusioncharts = new FusionCharts({
