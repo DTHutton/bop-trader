@@ -2,27 +2,27 @@
 // const app = express.Router();
 // const bcrypt = require('bcryptjs');
 // const dbUser = require("../models/user");
-// const passport = require("passport");
+const passport = require("passport");
+const Authentication = require("../config/auth");
 
 const db = require("../models");
-const isAuthenticated = require("../config/auth");
+// const isAuthenticated = require("../config/auth");
 
 module.exports = function(app) {
   // Load index page
-  app.get("/", function(req, res) {
-    db.Example.findAll({}).then(function(dbExamples) {
-      // changed index to welcome for now
-      // console.log("hello");
-      res.render("welcome", {
-        msg: "Welcome!",
-        examples: dbExamples
-      });
-    });
-  });
+  // app.get("/", function(req, res) {
+  //   db.Example.findAll({}).then(function(dbExamples) {
+  //     // changed index to welcome for now
+  //     // console.log("hello");
+  //     res.render("welcome", {
+  //       msg: "Welcome!",
+  //       examples: dbExamples
+  //     });
+  //   });
+  // });
 
   // DASHBOARD PAGE, protected by auth.js config >  isAuthenticated,
-  app.get("/dashboard", isAuthenticated, function(req, res) {
-    console.log("isATH check!  hit GET /dashboard html route");
+  app.get("/dashboard", function(req, res) {
     res.render("dashboard");
   });
 
@@ -34,8 +34,20 @@ module.exports = function(app) {
   });
 
   app.get("/login", (req, res) => {
-    console.log("HIT /login GET");
     res.render("login");
+  });
+
+  app.get("/index", (req, res) => {
+    console.log('the req.user', req.user);
+    if (req.user) {
+      console.log('this got hit');
+      var user = {
+        id: req.session.passport.user,
+        isloggedin: Authentication.isAuthenticated
+      };
+      return res.render("index", user);
+    }
+    return res.redirect("/login");
   });
 
   app.get("/logout", (req, res) => {

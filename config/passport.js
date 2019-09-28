@@ -12,6 +12,7 @@ passport.use(
       email: "email"
     },
     (email, password, done) => {
+      console.log('is it here');
       // When a user tries to sign in this code runs
       // Match user (check if user already has an email registered)
       User.findOne({
@@ -33,6 +34,7 @@ passport.use(
           });
         }
         // If none of the above, return the user
+        console.log('the user', user);
         return done(null, user);
       });
       // .catch((err) => console.log(err));
@@ -44,8 +46,8 @@ passport.use(
 // Sequelize needs to serialize and deserialize the user
 
 passport.serializeUser((user, done) => {
-  done(null, user.id);
   console.log(". . >> passport.serializeUser HIT");
+  done(null, user.id);
   // example only returned user. not user.id
 });
 
