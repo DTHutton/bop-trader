@@ -1,28 +1,25 @@
-
-    
 <h2> Bitcoin Ticker</h2>
 <nav class="navbar navbar-dark">
-        <h1 class="logo pl-2">Real-Time Cryptocurrency</h1>
-    </nav>
-    <div class="container-fluid">
-        <div class="row text-center mt-4 pl-3 pr-3">
-            <div class="col-sm">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="h3">Bitcoin(BTC)</div>
-                        <div class="h5">(Price in USD)</div>
-                        <div id="btc_val" class="h4 kpi-value"></div>
-                    </div>
+    <h1 class="logo pl-2">Real-Time Cryptocurrency</h1>
+</nav>
+<div class="container-fluid">
+    <div class="row text-center mt-4 pl-3 pr-3">
+        <div class="col-sm">
+            <div class="card">
+                <div class="card-body">
+                    <div class="h3">Bitcoin(BTC)</div>
+                    <div class="h5">(Price in USD)</div>
+                    <div id="btc_val" class="h4 kpi-value"></div>
                 </div>
             </div>
         </div>
-        
-        <div class="row mt-4 pr-3 pl-3">
-            <div class="col">
-                <div class="card">
-                    <div class="card-body">
-                        <div id="chart-container"></div>
-                    </div>
+    </div>
+
+    <div class="row mt-4 pr-3 pl-3">
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <div id="chart-container"></div>
                 </div>
             </div>
         </div>
@@ -32,11 +29,12 @@
 <!-- FusionCharts' style files -->
 <link rel="stylesheet" src="https://ds.fusioncharts.com/2.0.8/css/ds.css">
 <!-- My CSS file, will send along side on slack. Not having it is no problem -->
-<link rel="stylesheet" href="styles/test.css"> 
+<link rel="stylesheet" href="styles/test.css">
 <!-- Required Scripts from FusionCharts -->
 <script src="https://ds.fusioncharts.com/2.0.8/js/ds.js"></script>
 <script type="text/javascript" src="http://cdn.fusioncharts.com/fusioncharts/latest/fusioncharts.js"></script>
-<script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.fusion.js"></script>
+<script type="text/javascript"
+    src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.fusion.js"></script>
 <!-- JavaScript Section: -->
 <script>
     //Fetch the value of Bitcoin
@@ -54,7 +52,6 @@
         var curr_min = date_time.getMinutes();
         var curr_sec = date_time.getSeconds();
         var curr_time = zero_added_curr_hour + ':' + curr_min + ':' + curr_sec;
-​
         return curr_time
     }
     function makeHttpObject() {
@@ -65,7 +62,6 @@
         var request = makeHttpObject();
         request.open("GET", api_url, false);
         request.send(null);
-​
         return request.responseText;
     }
     function bitcoinDataHandler() {
@@ -79,80 +75,75 @@
         var api_server_epoch_timestamp = data.timestamp;
         var api_success = data.success;
         var api_error = data.error;
-​
         return price;
     }
-​
     document.getElementById("btc_val").innerHTML = "$" + Math.round(bitcoinDataHandler());
-​
     // Create Chart
     FusionCharts.ready(function () {
         var fusioncharts = new FusionCharts({
-        id: "stockRealTimeChart",
-        type: 'realtimeline',
-        renderAt: 'chart-container',
-        width: '100%',
-        height: '350',
-        dataFormat: 'json',
-        dataSource: {
-            "chart": {
-                "caption": "Bitcoin Ticker",
-                "subCaption": "",
-                "xAxisName": "Local Time",
-                "yAxisName": "USD",
-                "numberPrefix": "$",
-                "refreshinterval": "2",
-                "slantLabels": "1",
-                "numdisplaysets": "10",
-                "labeldisplay": "rotate",
-                "showValues": "0",
-                "showRealTimeValue": "0",
-​
-                // The two lines below give the current price in string. Does not look good on graph
-                // "yAxisMaxValue": (bitcoinDataHandler().toString() + 1),
-                // "yAxisMinValue": (bitcoinDataHandler().toString() - 1),
-​
-                // These two lines are static, it is subject to change as we will need to update if the price
-                // goes above or under the set values
-                "yAxisMaxValue": (8500),
-                "yAxisMinValue": (8000),
-                "theme": "carbon",
-                // dataStreamURL requires a php file. May or may not use.
-                // "dataStreamURL": "https://api.cryptonator.com/api/ticker/btc-usd",
-                "dataStamp": "00:00:01"
+            id: "stockRealTimeChart",
+            type: 'realtimeline',
+            renderAt: 'chart-container',
+            width: '100%',
+            height: '350',
+            dataFormat: 'json',
+            dataSource: {
+                "chart": {
+                    "caption": "Bitcoin Ticker",
+                    "subCaption": "",
+                    "xAxisName": "Local Time",
+                    "yAxisName": "USD",
+                    "numberPrefix": "$",
+                    "refreshinterval": "2",
+                    "slantLabels": "1",
+                    "numdisplaysets": "10",
+                    "labeldisplay": "rotate",
+                    "showValues": "0",
+                    "showRealTimeValue": "0",
+                    // The two lines below give the current price in string. Does not look good on graph
+                    // "yAxisMaxValue": (bitcoinDataHandler().toString() + 1),
+                    // "yAxisMinValue": (bitcoinDataHandler().toString() - 1),
+                    // These two lines are static, it is subject to change as we will need to update if the price
+                    // goes above or under the set values
+                    "yAxisMaxValue": (8500),
+                    "yAxisMinValue": (8000),
+                    "theme": "carbon",
+                    // dataStreamURL requires a php file. May or may not use.
+                    // "dataStreamURL": "https://api.cryptonator.com/api/ticker/btc-usd",
+                    "dataStamp": "00:00:01"
+                },
+                "categories": [{
+                    "category": [{
+                        "label": "Day Start"
+                    }]
+                }],
+                "dataset": [{
+                    "data": [{
+                        "value": bitcoinDataHandler().toString()
+                    }]
+                }]
             },
-            "categories": [{
-                "category": [{
-                    "label": "Day Start"
-                }]
-            }],
-            "dataset": [{
-                "data": [{
-                    "value": bitcoinDataHandler().toString()
-                }]
-            }]
-        },
-        "events": {
-            "initialized": function (e) {
-                function updateData() {
-                    // Get reference to the chart using its ID
-                    var chartRef = FusionCharts("stockRealTimeChart"),
-                    x_axis = clientDateTime(),
-                    y_axis = bitcoinDataHandler(),
-                    strData = "&label=" + x_axis + "&value=" + y_axis;
-                    // Feed it to chart.
-                    chartRef.feedData(strData);
+            "events": {
+                "initialized": function (e) {
+                    function updateData() {
+                        // Get reference to the chart using its ID
+                        var chartRef = FusionCharts("stockRealTimeChart"),
+                            x_axis = clientDateTime(),
+                            y_axis = bitcoinDataHandler(),
+                            strData = "&label=" + x_axis + "&value=" + y_axis;
+                        // Feed it to chart.
+                        chartRef.feedData(strData);
+                    }
+                    e.sender.chartInterval = setInterval(function () {
+                        updateData();
+                    }, time_interval * 1000);
+                },
+                "disposed": function (evt, arg) {
+                    clearInterval(evt.sender.chartInterval);
                 }
-                e.sender.chartInterval = setInterval(function () {
-                    updateData();
-                }, time_interval * 1000);
-            },
-            "disposed": function (evt, arg) {
-                clearInterval(evt.sender.chartInterval);
             }
-        }
         });
         // Render Chart
         fusioncharts.render();
-        });
+    });
 </script>
