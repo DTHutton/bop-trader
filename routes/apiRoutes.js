@@ -1,4 +1,5 @@
 var db = require("../models");
+var math = require("../public/js/math");
 
 module.exports = function(app) {
   // POST route for saving a newUser
@@ -24,7 +25,7 @@ module.exports = function(app) {
         // CHANGE TO REDIRECT after it works
       } else {
         bcrypt.compare(req.body.password, user.password, function(err, result) {
-          if (result == true) {
+          if (result === true) {
             console.log("hello > bcrypt result == true");
             res.send("true! change to render dashboard");
           } else {
@@ -42,7 +43,7 @@ module.exports = function(app) {
   });
 
   // GET FUSION CHARTS
-  app.get("/api/fusioncharts", function(req, res) {
+  app.get("/fusioncharts", function(req, res) {
     res.render("fusioncharts");
   });
 
@@ -53,9 +54,10 @@ module.exports = function(app) {
     });
   });
 
-  // Delete a user by id
-  app.delete("/api/users/:id", function(req, res) {
-    db.User.destroy({ where: { id: req.params.id } }).then(function(dbUser) {
+  // Delete a user by userId
+  app.delete("/api/users/:userId", function(req, res) {
+    // eslint-disable-next-line prettier/prettier
+    db.User.destroy({ where: { userId: req.params.userId } }).then(function(dbUser) {
       res.json(dbUser);
     });
   });

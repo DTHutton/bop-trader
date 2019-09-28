@@ -54,7 +54,6 @@
         var curr_min = date_time.getMinutes();
         var curr_sec = date_time.getSeconds();
         var curr_time = zero_added_curr_hour + ':' + curr_min + ':' + curr_sec;
-​
         return curr_time
     }
     function makeHttpObject() {
@@ -65,7 +64,6 @@
         var request = makeHttpObject();
         request.open("GET", api_url, false);
         request.send(null);
-​
         return request.responseText;
     }
     function bitcoinDataHandler() {
@@ -79,12 +77,9 @@
         var api_server_epoch_timestamp = data.timestamp;
         var api_success = data.success;
         var api_error = data.error;
-​
         return price;
     }
-​
     document.getElementById("btc_val").innerHTML = "$" + Math.round(bitcoinDataHandler());
-​
     // Create Chart
     FusionCharts.ready(function () {
         var fusioncharts = new FusionCharts({
@@ -107,11 +102,9 @@
                 "labeldisplay": "rotate",
                 "showValues": "0",
                 "showRealTimeValue": "0",
-​
                 // The two lines below give the current price in string. Does not look good on graph
                 // "yAxisMaxValue": (bitcoinDataHandler().toString() + 1),
                 // "yAxisMinValue": (bitcoinDataHandler().toString() - 1),
-​
                 // These two lines are static, it is subject to change as we will need to update if the price
                 // goes above or under the set values
                 "yAxisMaxValue": (8500),
