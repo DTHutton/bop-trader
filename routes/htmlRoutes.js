@@ -2,22 +2,28 @@
 // const app = express.Router();
 // const bcrypt = require('bcryptjs');
 // const dbUser = require("../models/user");
+const passport = require("passport");
+const Authentication = require("../config/auth");
 
 const db = require("../models");
-// const passport = require("passport");
-// const { ensureAthenticated } = require("../config/auth");
+// const isAuthenticated = require("../config/auth");
 
 module.exports = function(app) {
   // Load index page
-  app.get("/", function(req, res) {
-    db.Example.findAll({}).then(function(dbExamples) {
-      // changed index to welcome for now
-      // console.log("hello");
-      res.render("welcome", {
-        msg: "Welcome!",
-        examples: dbExamples
-      });
-    });
+  // app.get("/", function(req, res) {
+  //   db.Example.findAll({}).then(function(dbExamples) {
+  //     // changed index to welcome for now
+  //     // console.log("hello");
+  //     res.render("welcome", {
+  //       msg: "Welcome!",
+  //       examples: dbExamples
+  //     });
+  //   });
+  // });
+
+  // DASHBOARD PAGE, protected by auth.js config >  isAuthenticated,
+  app.get("/dashboard", function(req, res) {
+    res.render("dashboard");
   });
 
   // REGISTER GET ROUTE/logic
@@ -27,36 +33,27 @@ module.exports = function(app) {
     });
   });
 
-  app.get("/login", (req, res, next) => {
+  app.get("/login", (req, res) => {
     res.render("login");
-    // passport.authenticate("local", {
-    // youtube example, > was giving to many redirects? NEED THIS LATER
-    // successRedirect: "/dashboard",
-    // failureRedirect: "/login",
-    // failureFlash: true
-    // from passport docs >> boiler plate
-    // if (err) {return next(err);}
-    // if (!user) {return res.redirect('/login');}
-    // req.logIn(user, function(err) {if (err) {return next(err);}
-    // 	return res.redirect('/users/' + user.email);});
-    // })
-    req, res, next;
+  });
+
+  app.get("/index", (req, res) => {
+    console.log('the req.user', req.user);
+    if (req.user) {
+      console.log('this got hit');
+      var user = {
+        id: req.session.passport.user,
+        isloggedin: Authentication.isAuthenticated
+      };
+      return res.render("index", user);
+    }
+    return res.redirect("/login");
   });
 
   app.get("/logout", (req, res) => {
     req.logout();
     req.flash("success_msg", "You are logged out");
     res.redirect("/login");
-  });
-
-  // DASHBOARD PAGE, protected by auth.js config >  ensureAthenticated,
-  // ADD AS parameter when we are done with project
-  app.get("/dashboard", (req, res) => {
-    // res.send("HIT THE /get (dashboard) > in the htmlRoutes")
-    console.log("hit GET /dashboard html route")
-    // res.render("dashboard", {
-    //   email: req.body.email
-    // });
   });
 
   // Render 404 page for any unmatched routes
@@ -66,6 +63,19 @@ module.exports = function(app) {
 };
 
 // ===========
+// passport.authenticate("local", {
+// youtube example, > was giving to many redirects? NEED THIS LATER
+// successRedirect: "dashboard",
+// failureRedirect: "login"
+// ,
+// failureFlash: true
+// from passport docs >> boiler plate
+// if (err) {return next(err);}
+// if (!user) {return res.redirect('/login');}
+// req.logIn(user, function(err) {if (err) {return next(err);}
+// 	return res.redirect('/users/' + user.email);});
+// });
+// req, res, next;
 // ===========
 
 // app.get('/login', (req,res) => {
@@ -75,6 +85,13 @@ module.exports = function(app) {
 // });
 
 // +==========
+// ADD AS parameter when we are done with project
+// app.get("/dashboard", isAuthenticated, (req, res) => {
+// app.get("/dashboard", (req, res) => {
+// res.send("HIT THE /get (dashboard) > in the htmlRoutes")
+//   console.log("hit GET /dashboard html route");
+//   res.render("dashboard");
+// });
 
 // Load example page and pass in an example by id
 // app.get('/example/:id', function(req, res) {

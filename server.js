@@ -12,7 +12,8 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Passport config
-require("./config/passport")(passport);
+require("./config/passport")
+// require("./config/passport")(passport);
 
 // Middleware
 // bodyParser = require("body-parser") > (NOW THIS BODY PARSER IS INCLUDED WITH EXRPRESS)

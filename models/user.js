@@ -8,6 +8,8 @@
 
 // Sequelize will pluralize our table names by default, so always name your models in the singular.
 
+var bcrypt = require("bcrypt");
+
 module.exports = function(sequelize, DataTypes) {
   var User = sequelize.define("User", {
     userId: {
@@ -18,6 +20,7 @@ module.exports = function(sequelize, DataTypes) {
     email: {
       type: DataTypes.STRING,
       required: true,
+      unique: true,
       allowNull: false,
       validate: {
         len: [1, 30]
@@ -28,7 +31,7 @@ module.exports = function(sequelize, DataTypes) {
       required: true,
       allowNull: false,
       validate: {
-        len: [1, 30]
+        len: [1, 60]
       }
     },
     cash: {
@@ -56,6 +59,22 @@ module.exports = function(sequelize, DataTypes) {
       defaultValue: DataTypes.NOW
     }
   });
+
+  // Generating a hash
+  User.generateHash = function(password) {
+    return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+  };
+
+  // Creating a custom method for our User model. This will check if an unhashed password entered by the user can be compared to the hashed password stored in our database
+  User.prototype.validPassword = function(password) {
+    return bcrypt.compareSync(password, this.password);
+  };
+  // Hooks are automatic methods that run during various phases of the User Model lifecycle
+  // In this case, before a User is created, we will automatically hash their password
+  // User.hook("beforeCreate", function(user) {
+  //   user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(10), null);
+  // });
+  // return User;
 
   return User;
 };
