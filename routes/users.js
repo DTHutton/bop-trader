@@ -1,19 +1,28 @@
 const db = require("../models");
-// const passport = require('passport');
+const passport = require("passport");
+var bcrypt = require("bcrypt");
+const saltRounds = 1;
 // const { ensureAthenticated } = require("../config/auth");
 
 module.exports = function(app) {
-  // REGISTER POST user, validate form input, show user partials msg
+  // Using the passport.authenticate middleware with our local strategy.
+  // If the user has valid login credentials, send them to the members page.
+  // Otherwise the user will be sent an error
+  app.post("/login", passport.authenticate("local"), function(req, res) {
+    // Since we're doing a POST with javascript, we can't actually redirect that post into a GET request
+    // So we're sending the user back the route to the members page because the redirect will happen on the front end
+    // They won't get this or even be able to access this page if they aren't authed
+    console.log("app.post( /login  (similar to example /api/login");
+    // res.send("hell0 >>>>> HIT POST  / login   for authentication local")
+    res.render("dashboard");
+  });
 
+  // REGISTER POST user, validate form input, show user partials msg (PARTIAL FLASH MSG NOT WORKING>..)
   app.post("/register", (req, res) => {
-    console.log(
-      "USER ROUTES _ POST /register route hit >> req.body = ",
-      req.body
-    );
-    // res.send('hello, post route was hit A-okay');
-    // destructuring req.body
-    const { email, emailValidate, password, passwordValidate } = req.body;
+    // console.log("== > > POST /register route hit >> req.body = ",req.body);
 
+    // Destructuring req.body to check form was entered correctly
+    const { email, emailValidate, password, passwordValidate } = req.body;
     const errors = [];
 
     // Check required fields >
@@ -44,16 +53,15 @@ module.exports = function(app) {
         // passwordValidate
       });
     } else {
-      console.log(
-        "NO FORM ENTER ERRORS, Now, check if that user already exists\n"
-      );
+      console.log("\n NO FORM ERRORS, Now check if that user already exists\n");
+
       // res.send("validation pass");
+
       db.User.findAll({ email, where: { email } }).then(user => {
-        // UPDATED THIS to email, where: {email }      >>>>>>>>>>>>>>>>>> DOUBLE CHECK THIS
+        // UPDATED THIS to email, where: {email } >>> DOUBLE CHECK THIS
         if (user.length) {
-          console.log("user = ", user);
           console.log(
-            "\n then function ... if user already exists,  re-render the page with erros and pervious entered info \n"
+            "\n If user already exists,  re-render the page with erros and pervious entered info \n"
           );
           // User exists
           errors.push({ msg: "Email is already registered" });
@@ -61,23 +69,40 @@ module.exports = function(app) {
             errors,
             email
           });
-        } else {
-          //  console.log("new user created");
-          const newUser = new db.User({
-            email,
-            password
-          });
 
-          db.User.create(req.body).then(function(dbUser) {
-            res.json(dbUser);
+          console.log(
+            "WHY ARE NEW USERS CREATED STILL WHEN THEY HAVE THE SAME NAME"
+          );
+        } else {
+          // BCRYPT
+          bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
+            db.User.create({
+              email: req.body.email,
+              password: hash
+            }).then(function(data) {
+              if (data) {
+                res.render("login");
+              }
+              // res.json(user);
+            });
           });
-          console.log("\n new user created, user = \n", newUser);
+          // console.log("\n new user created, user = \n newUser \n ", );
           // res.render("dashboard");
         }
       });
     }
   });
 };
+
+// =============== END
+
+// ===============
+// ===============
+// ===============
+
+// ===============
+
+// ===============
 
 // ===============
 

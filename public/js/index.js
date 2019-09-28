@@ -8,7 +8,7 @@ $(document).ready(function() {
 
   // The API object contains methods for each kind of request we'll make
   const API = {
-    saveExample: function(user) {
+    saveUser: function(user) {
       return $.ajax({
         headers: {
           "Content-Type": "application/json"
@@ -33,7 +33,7 @@ $(document).ready(function() {
   };
 
   // handleFormSubmit is called whenever we submit a new example
-  // Save the new example to the db and refresh the list
+  // Save the new user to the db and refresh the list
   var handleFormSubmit = function(event) {
     event.preventDefault();
     console.log("handleFormSubmit HIT on @ index.js public file");
@@ -59,14 +59,15 @@ $(document).ready(function() {
       return;
     }
 
-    API.saveExample(user);
+    // ** ** POSTS to /register WHY DO I HAVE THIS TWICE
+    API.saveUser(user);
 
-    // ====++=+=++=++==+=+=+=+=====
+    // ====++=+=++=++==+=+=+=+=====   ** ** ** ** ** ** *** ** * ** * * *
     // Submits a new user to the database and brings user to blog page upon completion
-    // $.post("/register", user, function() {
-    //   // window.location.href = "/dashboard";
-    //   console.log("hello >>> COMPLETED $.post(/register");
-    // });
+    $.post("/register", user, function() {
+      window.location.href = "/dashboard";
+      console.log("hello >>> COMPLETED $.post(/register");
+    });
 
     $("#email").val("");
     $("#emailValidate").val("");
@@ -79,6 +80,7 @@ $(document).ready(function() {
 });
 
 //  ============= END
+
 //  =============
 // $exampleList.on("click", ".delete", handleDeleteBtnClick);
 
