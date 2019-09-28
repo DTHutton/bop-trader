@@ -2,18 +2,19 @@ $(document).ready(function() {
   // Get references to page elements
   // const $exampleText = $("#example-text");
   // const $exampleDescription = $("#example-description");
+  // const $exampleList = $("#example-list");
+
   const $submitBtn = $("#submit");
-  const $exampleList = $("#example-list");
 
   // The API object contains methods for each kind of request we'll make
   const API = {
-    saveExample: function(user) {
+    saveUser: function(user) {
       return $.ajax({
         headers: {
           "Content-Type": "application/json"
         },
         type: "POST",
-        url: "api/examples",
+        url: "/register",
         data: JSON.stringify(user)
       });
     },
@@ -31,126 +32,95 @@ $(document).ready(function() {
     }
   };
 
-  // refreshExamples gets new examples from the db and repopulates the list
-  const refreshExamples = function() {
-    API.getExamples().then(function(data) {
-      const $examples = data.map(function(example) {
-        const $a = $("<a>")
-          .text(example.text)
-          .attr("href", "/example/" + example.id);
-
-        const $li = $("<li>")
-          .attr({
-            class: "list-group-item",
-            "data-id": example.id
-          })
-          .append($a);
-
-        const $button = $("<button>")
-          .addClass("btn btn-danger float-right delete")
-          .text("ｘ");
-
-        $li.append($button);
-
-        return $li;
-      });
-
-      $exampleList.empty();
-      $exampleList.append($examples);
-    });
-  };
-
   // handleFormSubmit is called whenever we submit a new example
-  // Save the new example to the db and refresh the list
+  // Save the new user to the db and refresh the list
   var handleFormSubmit = function(event) {
     event.preventDefault();
-    console.log("handleFormSubmit HIT on @ register.js public file");
-
+    console.log("handleFormSubmit HIT on @ index.js public file");
     const user = {
-      username: $("#name")
+      email: $("#email")
         .val()
         .trim(),
-      email: $("#email")
+      emailValidate: $("#emailValidate")
         .val()
         .trim(),
       password: $("#password")
         .val()
         .trim(),
-      password2: $("#password2")
+      passwordValidate: $("#passwordValidate")
         .val()
         .trim()
     };
 
-    console.log("user = ", user);
+    console.log("index.js > >  user = ", user);
 
-    if (!(user.username && user.email)) {
+    if (!(user.email && user.password)) {
       alert("You must enter an example text and description!");
       return;
     }
 
-    API.saveExample(user).then(function() {
-      refreshExamples();
+    // ** ** POSTS to /register WHY DO I HAVE THIS TWICE
+    API.saveUser(user);
+
+    // ====++=+=++=++==+=+=+=+=====   ** ** ** ** ** ** *** ** * ** * * *
+    // Submits a new user to the database and brings user to blog page upon completion
+    $.post("/register", user, function() {
+      window.location.href = "/dashboard";
+      console.log("hello >>> COMPLETED $.post(/register");
     });
 
-    $("#name").val("");
     $("#email").val("");
+    $("#emailValidate").val("");
     $("#password").val("");
-    $("#password2").val("");
-    // console.log('REGISTER.JS HIT > > >   user = ', user);
-  };
-
-  // handleDeleteBtnClick is called when an example's delete button is clicked
-  // Remove the example from the db and refresh the list
-  const handleDeleteBtnClick = function() {
-    const idToDelete = $(this)
-      .parent()
-      .attr("data-id");
-
-    API.deleteExample(idToDelete).then(function() {
-      refreshExamples();
-    });
+    $("#passwordValidate").val("");
   };
 
   // Add event listeners to the submit and delete buttons
   $submitBtn.on("click", handleFormSubmit);
-  $exampleList.on("click", ".delete", handleDeleteBtnClick);
 });
 
 //  ============= END
+
 //  =============
-//  =============
+// $exampleList.on("click", ".delete", handleDeleteBtnClick);
 
-// example
+// refreshExamples gets new examples from the db and repopulates the list
+// const refreshExamples = function() {
+//   API.getExamples().then(function(data) {
+//     const $examples = data.map(function(example) {
+//       const $a = $("<a>")
+//         .text(example.text)
+//         .attr("href", "/example/" + example.id);
 
-// handleFormSubmit is called whenever we submit a new example
-// Save the new example to the db and refresh the list
-// const handleFormSubmit = function (event) {
-//   event.preventDefault();
+//       const $li = $("<li>")
+//         .attr({
+//           class: "list-group-item",
+//           "data-id": example.id
+//         })
+//         .append($a);
 
-//   const user = {
-//     username: $("name").val().trim(),
-//     email: $("email").val().trim(),
-//     password: $("password").val().trim(),
-//     password2: $("password2").val().trim()
-//   };
+//       const $button = $("<button>")
+//         .addClass("btn btn-danger float-right delete")
+//         .text("ｘ");
 
-// const example = {
-//   text: $exampleText.val().trim(),
-//   description: $exampleDescription.val().trim()
+//       $li.append($button);
+
+//       return $li;
+//     });
+
+//     $exampleList.empty();
+//     $exampleList.append($examples);
+//   });
 // };
 
-//   if (!(example.text && example.description)) {
-//     alert("You must enter an example text and description!");
-//     return;
-//   }
+// handleDeleteBtnClick is called when an example's delete button is clicked
+// Remove the example from the db and refresh the list
+// const handleDeleteBtnClick = function() {
+//   const idToDelete = $(this)
+//     .parent()
+//     .attr("data-id");
 
-//   API.saveExample(example).then(function () {
+//   API.deleteExample(idToDelete).then(function() {
 //     refreshExamples();
 //   });
-
-//   $exampleText.val("");
-//   $exampleDescription.val("");
 // };
-
-// #
-//
