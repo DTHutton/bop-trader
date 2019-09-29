@@ -13,19 +13,21 @@ Users create an account and are initially provided a set amount of money to use 
 * TODO
 
 ## Tech
-* [Node](https://nodejs.org/en/)
-* [Express](https://www.npmjs.com/package/express)
-* [Mysql](https://www.npmjs.com/package/mysql)
 
-## Credits
-* [Austin Alber](https://github.com/austinalber)
-    * Database Deity
-    * Snacks
+### BoP Trader was made possible by:
 
-* [Thomas White](https://github.com/thomas-white-ucf)
-    * Logic Lord
-    * Security
-    
-* [Derek Hutton](https://github.com/DTHutton)
-    * Admiral Aesthetic
-    * General Unhelpfulness
+~~~~~ | ~~~~~
+------------ | -------------
+[Express](https://www.npmjs.com/package/express) | [Bootstrap](https://getbootstrap.com/)
+[Mysql](https://www.npmjs.com/package/mysql) | [jQuery](https://jquery.com/)
+[Sequelize](https://www.npmjs.com/package/sequelize) | [Fusion Charts](https://www.fusioncharts.com/)
+[Passport](https://www.npmjs.com/package/passport) | [Travis CI](https://travis-ci.org/)
+[Bcrypt](https://www.npmjs.com/package/bcrypt) | [Heroku](https://www.heroku.com/)
+
+
+## Developers
+
+[Austin Alber](https://github.com/austinalber) | [Thomas White](https://github.com/thomas-white-ucf) | [Derek Hutton](https://github.com/DTHutton)
+------------ | ------------- | -------------
+Database Deity | Logic Lord | Admiral Aesthetic
+Snacks | Security | General Unhelpfulness
