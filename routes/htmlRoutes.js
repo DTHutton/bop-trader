@@ -8,17 +8,10 @@
 // const db = require("../models");
 
 module.exports = function(app) {
-  // Load index page
-  // app.get("/", function(req, res) {
-  //   db.Example.findAll({}).then(function(dbExamples) {
-  //     // changed index to welcome for now
-  //     // console.log("hello");
-  //     res.render("welcome", {
-  //       msg: "Welcome!",
-  //       examples: dbExamples
-  //     });
-  //   });
-  // });
+  // Load welcome page
+  app.get("/", function(req, res) {
+    res.render("welcome");
+  });
 
   // DASHBOARD PAGE, protected by auth.js config >  isAuthenticated,
   // app.get("/dashboard", function(req, res) {
