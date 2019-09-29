@@ -21,6 +21,7 @@
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script>
   <script src="https://kit.fontawesome.com/2143376535.js" crossorigin="anonymous"></script>
+  <link href="https://fonts.googleapis.com/css?family=Righteous&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles/styles.css">
 
 </head>
@@ -28,29 +29,29 @@
 <body>
 
   <header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-      <a class="navbar-brand" href="#">BoP Trader</a>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom border-light">
+      <div class="navbar-brand text-light bop-logo">BoP Trader</div>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="/dashboard">Dashboard</a>
+            <a class="nav-link text-light" href="/">Home</a>
           </li>
           <li class="nav-item active">
-            <a class="nav-link" href="#">Profile</a>
+            <a class="nav-link text-light" href="/dashboard">Dashboard</a>
           </li>
           <li class="nav-item active pt-2 pb-1">
-            <div class="mx-1"> | </div>
+            <div class="mx-1 text-light"> | </div>
           </li>
           <li class="nav-item active pt-2 pb-1">
-            <div class="mx-1" id="btc_val"></div>
+            <div class="mx-1 text-warning" id="btc_val"></div>
           </li>
         </ul>
 
 
 
         <form class="form-inline">
-          <button class="btn btn-outline-primary mr-1" type="button" data-target="exampleModalCenter">Login</button>
-          <button class="btn btn-outline-primary ml-1" type="button">Sign Up</button>
+          <button class="btn btn-outline-light text-light mr-1" type="button">Login</button>
+          <button class="btn btn-outline-light text-light ml-1" type="button">Sign Up</button>
         </form>
       </div>
     </nav>
@@ -63,23 +64,24 @@
   </div>
 
 
-  <footer class="footer m-1 p-1 border-top">
+  <footer class="footer m-1 p-1 border-top border-light">
     <div class="d-flex justify-content-between align-items-center px-1 mx-1">
       <span>
         <h5>
-          <a href="https://github.com/DTHutton/bop-trader" target="_blank">BoP Trader Repo</a>
+          <a class="text-info" href="https://github.com/DTHutton/bop-trader" target="_blank">BoP Trader Repo</a>
         </h5>
       </span>
 
       <span class="py-1 d-flex">
-        <div class="justify-content-between p-1"><strong>Developers: </strong></div>
-        <a class="justify-content-between p-1" href="https://github.com/austinalber" target="_blank">Austin
+        <div class="justify-content-between p-1 text-info"><strong>Developers: </strong></div>
+        <a class="justify-content-between p-1 text-light" href="https://github.com/austinalber" target="_blank">Austin
           Alber</a>
         <div class="justify-content-between p-1"> | </div>
-        <a class="justify-content-between p-1" href="https://github.com/thomas-white-ucf" target="_blank">Thomas
+        <a class="justify-content-between p-1 text-light" href="https://github.com/thomas-white-ucf"
+          target="_blank">Thomas
           White</a>
         <div class="justify-content-between p-1"> | </div>
-        <a class="justify-content-between p-1" href="https://github.com/DTHutton" target="_blank">Derek
+        <a class="justify-content-between p-1 text-light" href="https://github.com/DTHutton" target="_blank">Derek
           Hutton</a>
       </span>
     </div>
