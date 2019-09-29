@@ -8,36 +8,134 @@
     {{> fusioncharts }}
 </section>
 
-<section>
+<div class="container">
+
     {{!--TODO current stock and buying power go here --}}
-    <h1>test</h1>
-</section>
+    <section class="row">
 
-<section>
-    {{!--TODO trade actions go here --}}
-    <h1>test</h1>
-</section>
+        <table class="table table-dark table-sm col-sm-6 table-bordered text-centered">
+            <caption class="text-light">Current Capital</caption>
+            <thead>
+                <tr>
+                    <th scope="col">Total BTC</th>
+                    <th scope="col">Total Cash on Hand</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">45</th>
+                    <td>$6000.00</td>
+                </tr>
+            </tbody>
+        </table>
 
-<section>
+        <div class="col-sm-3">
+
+        </div>
+
+        <div class="col-sm-3">
+            <div class="row">
+                {{!-- buy btc --}}
+                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#buyBTC">
+                    Buy BTC
+                </button>
+            </div>
+
+            <div class="row">
+                <br>
+            </div>
+
+            <div class="row">
+                {{!-- sell btc --}}
+                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#sellBTC">
+                    Sell BTC
+                </button>
+            </div>
+
+        </div>
+
+    </section>
+
+</div>
+
+<section class="row">
     {{!-- transaction history --}}
-    <table class="table table-dark">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Time Stamp</th>
-                <th scope="col">Stock Held</th>
-                <th scope="col">Account Value</th>
-                <th scope="col">Buying Power</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>time example</td>
-                <td>stock example</td>
-                <td>acct val example</td>
-                <td>buy pwr example</td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="col-sm-12">
+        <table class="table table-dark table-bordered">
+            <caption class="text-light">Transaction History</caption>
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Time Stamp</th>
+                    <th scope="col">Stock Held</th>
+                    <th scope="col">Account Value</th>
+                    <th scope="col">Buying Power</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>time example</td>
+                    <td>stock example</td>
+                    <td>acct val example</td>
+                    <td>buy pwr example</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </section>
+
+
+{{!-- purchase modal --}}
+<div class="modal fade" id="buyBTC" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Buy BTC</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Amount to be Purchased</label>
+                        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="0">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info">Confirm</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{!-- sell modal --}}
+<div class="modal fade" id="sellBTC" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Sell BTC</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Amount to be Sold</label>
+                        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="0">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info">Confirm</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

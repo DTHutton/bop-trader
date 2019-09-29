@@ -16,7 +16,7 @@ Users create an account and are initially provided a set amount of money to use 
 
 ### BoP Trader was made possible by:
 
-~~~~~ | ~~~~~
+Node | Other
 ------------ | -------------
 [Express](https://www.npmjs.com/package/express) | [Bootstrap](https://getbootstrap.com/)
 [Mysql](https://www.npmjs.com/package/mysql) | [jQuery](https://jquery.com/)
