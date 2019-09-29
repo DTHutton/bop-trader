@@ -13,8 +13,12 @@
     {{!--TODO current stock and buying power go here --}}
     <section class="row">
 
-        <table class="table table-dark table-sm col-sm-6 table-bordered text-centered">
-            <caption class="text-light">Current Capital</caption>
+        <div class="col-sm-2">
+
+        </div>
+
+        <table class="table bg-light table-sm col-sm-5 table-bordered text-centered border">
+            <caption class="text-dark bg-light text-center font-weight-bold">Current Capital</caption>
             <thead>
                 <tr>
                     <th scope="col">Total BTC</th>
@@ -29,12 +33,12 @@
             </tbody>
         </table>
 
-        <div class="col-sm-3">
+        <div class="col-sm-1">
 
         </div>
 
-        <div class="col-sm-3">
-            <div class="row">
+        <div class="col-sm-2">
+            <div class="row justify-content-center">
                 {{!-- buy btc --}}
                 <button type="button" class="btn btn-info" data-toggle="modal" data-target="#buyBTC">
                     Buy BTC
@@ -45,12 +49,16 @@
                 <br>
             </div>
 
-            <div class="row">
+            <div class="row justify-content-center">
                 {{!-- sell btc --}}
                 <button type="button" class="btn btn-info" data-toggle="modal" data-target="#sellBTC">
                     Sell BTC
                 </button>
             </div>
+
+        </div>
+
+        <div class="col-sm-2">
 
         </div>
 
@@ -61,8 +69,8 @@
 <section class="row">
     {{!-- transaction history --}}
     <div class="col-sm-12">
-        <table class="table table-dark table-bordered">
-            <caption class="text-light">Transaction History</caption>
+        <table class="table bg-light table-bordered">
+            <caption class="text-dark bg-light text-center font-weight-bold">Transaction History</caption>
             <thead>
                 <tr>
                     <th scope="col">#</th>
@@ -100,8 +108,8 @@
             <div class="modal-body">
                 <form>
                     <div class="form-group">
-                        <label for="exampleFormControlInput1">Amount to be Purchased</label>
-                        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="0">
+                        <label for="btcPurchaseAmt">Amount to be Purchased</label>
+                        <input type="email" class="form-control" id="btcPurchaseAmt" placeholder="0">
                     </div>
                 </form>
             </div>
@@ -127,8 +135,8 @@
             <div class="modal-body">
                 <form>
                     <div class="form-group">
-                        <label for="exampleFormControlInput1">Amount to be Sold</label>
-                        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="0">
+                        <label for="btcSaleAmt">Amount to be Sold</label>
+                        <input type="email" class="form-control" id="btcSaleAmt" placeholder="0">
                     </div>
                 </form>
             </div>
