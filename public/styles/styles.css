@@ -2,6 +2,7 @@ body {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
+  background-color: #313941;
 }
 
 .container {
@@ -14,4 +15,8 @@ body {
   padding-right: 10px;
   padding-left: 10px;
   margin: 10px;
+}
+
+.bop-logo {
+  font-family: 'Righteous', cursive;
 }
