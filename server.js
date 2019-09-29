@@ -6,27 +6,25 @@ const exphbs = require("express-handlebars");
 const flash = require("connect-flash");
 const session = require("express-session");
 const passport = require("passport");
+var bodyParser = require("body-parser");
 const db = require("./models");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Passport config
-require("./config/passport")
-// require("./config/passport")(passport);
-
 // Middleware
-// bodyParser = require("body-parser") > (NOW THIS BODY PARSER IS INCLUDED WITH EXRPRESS)
 // FALSE = enables us to get info from our form with req.body
-app.use(express.urlencoded({ extended: false }));
+// Jason example had this >
+app.use(bodyParser.urlencoded({ extended: true }));
+// DO I NEED TO CHANGE TO TRUE.
+// app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-// app.use(express.static(__dirname + "public"));
 app.use(express.static("public"));
 
 // express-session Middleware
 app.use(
   session({
-    secret: "secret",
+    secret: "keyboard cat",
     resave: true,
     saveUninitialized: true
     // , cookie: { secure: true }
@@ -35,7 +33,7 @@ app.use(
 
 // Passport Middleware
 app.use(passport.initialize());
-app.use(passport.session());
+app.use(passport.session()); // persistent login sessions
 
 // Connect Flash
 app.use(flash());
@@ -59,11 +57,17 @@ app.engine(
 app.set("view engine", "handlebars");
 
 // Routes
+var authRoute = require("./routes/auth.js")(app, passport);
+
+// Passport config
+require("./config/passport/passport")(passport, db.user);
+
+// require("./routes/auth")(app, passport);
 require("./routes/apiRoutes")(app);
 require("./routes/htmlRoutes")(app);
-require("./routes/users")(app);
 // require("./routes/index")(app);
 
+// SHOULD sync be false?
 const syncOptions = { force: false };
 
 // If running a test, set syncOptions.force to true
@@ -83,4 +87,4 @@ db.sequelize.sync(syncOptions).then(function() {
   });
 });
 
-module.exports = app;
+// module.exports = app;

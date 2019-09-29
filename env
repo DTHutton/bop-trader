@@ -1,0 +1,4 @@
+DB_USERNAME="root"
+DB_PASSWORD="SQLsetpass774$"
+DB_DATABASE="bop_db"
+DB_HOST="localhost"

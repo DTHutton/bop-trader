@@ -5,7 +5,9 @@ const path      = require("path");
 const Sequelize = require("sequelize");
 const basename  = path.basename(module.filename);
 const env       = process.env.NODE_ENV || "development";
+// Jason example had different config logic because it was config.json
 const config    = require(__dirname + "/../config/config.js")[env];
+// const config    = require(__dirname + "/../config/config.js")[env];
 const db        = {};
 
 // if database is deployed, use JAWSDB_URL from config.use_env_variable
@@ -43,6 +45,10 @@ Object.keys(db).forEach(function (modelName) {
   if (db[modelName].associate) {
     db[modelName].associate(db);
   }
+  // OR written as
+  // if ('associate' in db[modelName]) {
+	// 	db[modelName].associate(db);
+	// }
 });
 
 db.sequelize = sequelize;
