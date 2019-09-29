@@ -1,5 +1,5 @@
+// const passport = require("passport");
 var db = require("../models");
-const passport = require("passport");
 
 module.exports = function(app) {
   // GET FUSION CHARTS
