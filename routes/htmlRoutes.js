@@ -10,16 +10,16 @@ const db = require("../models");
 
 module.exports = function(app) {
   // Load index page
-  // app.get("/", function(req, res) {
-  //   db.Example.findAll({}).then(function(dbExamples) {
-  //     // changed index to welcome for now
-  //     // console.log("hello");
-  //     res.render("welcome", {
-  //       msg: "Welcome!",
-  //       examples: dbExamples
-  //     });
-  //   });
-  // });
+  app.get("/", function(req, res) {
+    db.Example.findAll({}).then(function(dbExamples) {
+      // changed index to welcome for now
+      // console.log("hello");
+      res.render("welcome", {
+        msg: "Welcome!",
+        examples: dbExamples
+      });
+    });
+  });
 
   // DASHBOARD PAGE, protected by auth.js config >  isAuthenticated,
   app.get("/dashboard", function(req, res) {

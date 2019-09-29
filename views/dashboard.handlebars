@@ -1,9 +1,43 @@
-<h1 class="mt-4">Dashboard</h1>
-<p class="lead mb-3">Welcome {{email}}
-    {{!-- <%= user.name %> --}}
-    {{!-- Once you are logged in and set up passport we will have access to user object and fields in our database --}}
-</p>
-<a href="/logout" class="btn btn-secondary">Logout</a>
+<div class="jumbotron dashboard-padding">
+    <div class="container">
+        <h1 class="display-6 text-center">Dashboard</h1>
+    </div>
+</div>
 
+<section>
+    {{> fusioncharts }}
+</section>
 
+<section>
+    {{!--TODO current stock and buying power go here --}}
+    <h1>test</h1>
+</section>
 
+<section>
+    {{!--TODO trade actions go here --}}
+    <h1>test</h1>
+</section>
+
+<section>
+    {{!-- transaction history --}}
+    <table class="table table-dark">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Time Stamp</th>
+                <th scope="col">Stock Held</th>
+                <th scope="col">Account Value</th>
+                <th scope="col">Buying Power</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>time example</td>
+                <td>stock example</td>
+                <td>acct val example</td>
+                <td>buy pwr example</td>
+            </tr>
+        </tbody>
+    </table>
+</section>
