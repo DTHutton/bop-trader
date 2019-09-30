@@ -4,7 +4,7 @@
 //Fetch the value of Bitcoin
 const api_url = "https://api.cryptonator.com/api/ticker/btc-usd";
 // Log initial price at page loadup
-console.log(bitcoinDataHandler().toString());
+// console.log(bitcoinDataHandler().toString());
 const time_interval = 2;
 function addLeadingZero(num) {
   return num <= 9 ? "0" + num : num;
