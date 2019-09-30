@@ -14,7 +14,7 @@ body {
   padding-bottom: 20px;
   padding-right: 10px;
   padding-left: 10px;
-  margin: 10px;
+  margin-top: 10px;
 }
 
 .bop-logo {
@@ -22,9 +22,13 @@ body {
 }
 
 .table td {
-  text-align: center;   
+  text-align: center;
 }
 
 .table th {
-  text-align: center;   
+  text-align: center;
+}
+
+.githubIcon {
+  color: #d6942d;
 }
