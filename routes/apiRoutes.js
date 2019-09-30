@@ -14,9 +14,16 @@ module.exports = function(app) {
     });
   });
 
-  // Get all transaction data
-  app.get("/api/transactions", function(req, res) {
-    db.Transactions.findAll({}).then(function(dbUser) {
+  // Get all buy transaction data
+  app.get("/api/buy-transactions", function(req, res) {
+    db.BuyTransactions.findAll({}).then(function(dbUser) {
+      res.json(dbUser);
+    });
+  });
+
+  // Get all sell transaction data
+  app.get("/api/sell-transactions", function(req, res) {
+    db.SellTransactions.findAll({}).then(function(dbUser) {
       res.json(dbUser);
     });
   });
@@ -30,7 +37,9 @@ module.exports = function(app) {
 
   // Delete a user by userId
   app.delete("/api/users/:userId", function(req, res) {
-    db.User.destroy({ where: { userId: req.params.userId } }).then(function(dbUser) {
+    db.User.destroy({ where: { userId: req.params.userId } }).then(function(
+      dbUser
+    ) {
       res.json(dbUser);
     });
   });

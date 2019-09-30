@@ -17,4 +17,28 @@ CREATE TABLE Users
     PRIMARY KEY (userId)
 );
 
+CREATE TABLE buyTransactions
+(
+	id int AUTO_INCREMENT NOT NULL,
+    amount INT,
+    cryptoType VARCHAR(255),
+    priceAtBuy INT,
+    boughtAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	createdAt DATETIME,
+    updatedAt DATETIME,
+	PRIMARY KEY (id)
+);
+
+CREATE TABLE sellTransactions
+(
+	id int AUTO_INCREMENT NOT NULL,
+    amount INT,
+    cryptoType VARCHAR(255),
+    priceAtSell INT,
+    soldAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	createdAt DATETIME,
+    updatedAt DATETIME,
+	PRIMARY KEY (id)
+);
+
 SELECT * FROM `bop_db`.`Users` LIMIT 1000;
