@@ -1,7 +1,7 @@
 $(document).ready(function() {
   // Dependencies
   const axios = require("axios");
-  // Global Variable
+  // Global Variables/ testing variables
   const price = 0;
   var priceOfBuying = 8000;
   var userCash = 100000;
@@ -13,7 +13,7 @@ $(document).ready(function() {
     event.preventDefault();
 
     // Check if enough money is availiable to buy amount
-    // Need to update values
+    // Need to update values to current user information
     buyCheck(priceOfBuying, userCash, amountToBuy);
 
     // Define apiURL
@@ -41,6 +41,7 @@ $(document).ready(function() {
     // Send AJAX POST-request
     $.post("/api/transactions", newBuy).then(function() {
       // Successful Buy or Failed to buy
+      console.log("Successful Purchase");
     });
 
     // Update User current ownings
