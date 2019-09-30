@@ -30,29 +30,44 @@
 
   <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom border-light">
-      <div class="navbar-brand text-light bop-logo">BoP Trader</div>
+      <a href="/">
+        <div class="navbar-brand text-light bop-logo pt-0">BoP Trader</div>
+      </a>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link text-light" href="/">Home</a>
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link text-light" href="/dashboard">Dashboard</a>
+            <a class="nav-link text-light bop-logo" href="/dashboard">Dashboard</a>
           </li>
           <li class="nav-item active pt-2 pb-1">
-            <div class="mx-1 text-light"> | </div>
+            <div class="mx-1 text-light bop-logo"> | </div>
           </li>
           <li class="nav-item active pt-2 pb-1">
             <div class="mx-1 text-warning" id="btc_val"></div>
+          </li>
+          <li class="nav-item active pt-2 pb-1">
+            <div class="mx-1 text-success" id="ltc_val">LTC Placeholder</div>
+          </li>
+          <li class="nav-item active pt-2 pb-1">
+            <div class="mx-1 text-primary" id="eth_val">ETH Placeholder</div>
           </li>
         </ul>
 
 
 
-        <form class="form-inline">
-          <button class="btn btn-outline-light text-light mr-1" type="button">Login</button>
-          <button class="btn btn-outline-light text-light ml-1" type="button">Sign Up</button>
-        </form>
+        <div>
+          <div class="navbar-brand text-light bop-logo">News</div>
+          <div class="navbar-brand text-light bop-logo">|</div>
+          <a href="https://cointelegraph.com/tags/bitcoin">
+            <div class="navbar-brand text-warning">Bitcoin</div>
+          </a>
+          <a href="https://cointelegraph.com/tags/litecoin">
+            <div class="navbar-brand text-success">Litecoin</div>
+          </a>
+          <a href="https://cointelegraph.com/tags/Ethereum">
+            <div class="navbar-brand text-primary">Ethereum</div>
+          </a>
+
+        </div>
       </div>
     </nav>
   </header>

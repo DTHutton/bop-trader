@@ -6,7 +6,7 @@ const exphbs = require("express-handlebars");
 const flash = require("connect-flash");
 const session = require("express-session");
 const passport = require("passport");
-var bodyParser = require("body-parser");
+const bodyParser = require("body-parser");
 const db = require("./models");
 
 const app = express();

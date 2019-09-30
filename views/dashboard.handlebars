@@ -1,6 +1,6 @@
 <div class="jumbotron dashboard-padding">
     <div class="container">
-        <h1 class="display-6 text-center">Dashboard</h1>
+        <h1 class="display-6 text-center bop-logo">Dashboard</h1>
     </div>
 </div>
 
@@ -10,34 +10,29 @@
 
 <div class="container">
 
-    {{!--TODO current stock and buying power go here --}}
     <section class="row">
 
-        <div class="col-sm-2">
-
-        </div>
-
-        <table class="table bg-light table-sm col-sm-5 table-bordered text-centered border">
-            <caption class="text-dark bg-light text-center font-weight-bold">Current Capital</caption>
+        <table class="table bg-light table-sm col-sm-6 table-bordered text-centered border">
+            <caption class="text-dark bg-light text-center font-weight-bold">Current Assets</caption>
             <thead>
                 <tr>
+                    <th scope="col">Current Capital</th>
                     <th scope="col">Total BTC</th>
-                    <th scope="col">Total Cash on Hand</th>
+                    <th scope="col">Total LTC</th>
+                    <th scope="col">Total ETH</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <th scope="row">45</th>
-                    <td>$6000.00</td>
+                    <th scope="row">$6000.00</th>
+                    <td>50</td>
+                    <td>50</td>
+                    <td>50</td>
                 </tr>
             </tbody>
         </table>
 
-        <div class="col-sm-1">
-
-        </div>
-
-        <div class="col-sm-2">
+        <div class="col-sm-2 pt-2">
             <div class="row justify-content-center">
                 {{!-- buy btc --}}
                 <button type="button" class="btn btn-info" data-toggle="modal" data-target="#buyBTC">
@@ -58,7 +53,45 @@
 
         </div>
 
-        <div class="col-sm-2">
+        <div class="col-sm-2 pt-2">
+            <div class="row justify-content-center">
+                {{!-- buy LTC --}}
+                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#buyLTC">
+                    Buy LTC
+                </button>
+            </div>
+
+            <div class="row">
+                <br>
+            </div>
+
+            <div class="row justify-content-center">
+                {{!-- sell LTC --}}
+                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#sellLTC">
+                    Sell LTC
+                </button>
+            </div>
+
+        </div>
+
+        <div class="col-sm-2 pt-2">
+            <div class="row justify-content-center">
+                {{!-- buy ETH --}}
+                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#buyETH">
+                    Buy ETH
+                </button>
+            </div>
+
+            <div class="row">
+                <br>
+            </div>
+
+            <div class="row justify-content-center">
+                {{!-- sell ETH --}}
+                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#sellETH">
+                    Sell ETH
+                </button>
+            </div>
 
         </div>
 
@@ -93,57 +126,6 @@
     </div>
 </section>
 
-
-{{!-- purchase modal --}}
-<div class="modal fade" id="buyBTC" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-    aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Buy BTC</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form>
-                    <div class="form-group">
-                        <label for="btcPurchaseAmt">Amount to be Purchased</label>
-                        <input type="email" class="form-control" id="btcPurchaseAmt" placeholder="0">
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-info">Confirm</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-{{!-- sell modal --}}
-<div class="modal fade" id="sellBTC" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-    aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Sell BTC</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form>
-                    <div class="form-group">
-                        <label for="btcSaleAmt">Amount to be Sold</label>
-                        <input type="email" class="form-control" id="btcSaleAmt" placeholder="0">
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-info">Confirm</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
+<section>
+    {{> transactionModal}}
+</section>
