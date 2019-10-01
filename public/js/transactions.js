@@ -159,11 +159,11 @@ $(document).ready(function() {
       for (var i = 0; i < data.length; i++) {
         if (data.transactionType === "") {
           var newPost = `
-            <th scope="row">1</th>
+            <th scope="row">${i}</th>
             <td>${data.saleAt}<td>
             <td>${data.amount}<td>
             <td>${data.priceAtSale}<td>
-            <td>${checkType(data.transactionType)}<td>
+            <td>${data.transactionType}<td>
             `;
 
           $("#transaction-history").append(newPost);
