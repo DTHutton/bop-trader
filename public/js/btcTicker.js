@@ -21,12 +21,8 @@ function clientDateTime() {
 function makeHttpObject() {
   try {
     return new XMLHttpRequest();
-<<<<<<< HEAD
-  } catch (error) {}
-=======
   // eslint-disable-next-line no-empty
   } catch (error) { }
->>>>>>> f9269439648dd8f631598bb6e15b3635c5a2a814
 }
 function bitcoinGetData() {
   var request = makeHttpObject();
