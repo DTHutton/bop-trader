@@ -1,8 +1,3 @@
-// const express = require('express');
-// const app = express.Router();
-// const bcrypt = require('bcryptjs');
-// const dbUser = require("../models/user");
-// const passport = require("passport");
 const Authentication = require("../config/passport/passport");
 
 // const db = require("../models");
