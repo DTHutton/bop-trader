@@ -1,263 +1,157 @@
+/* eslint-disable no-unused-vars */
+
 $(document).ready(function() {
-  // Dependencies
-  const axios = require("axios");
   // Global Variables/ testing variables
-  const price = 0;
+  var price = 0;
   var priceOfBuying = 8000;
   var userCash = 100000;
   var amountToBuy = 5;
   var currencyOwned = 2;
+  var i = 0;
+
+  console.log("Hello!");
 
   // Buy option
-  $("#confirmBuyBTC").on("click", function(event) {
+  $("#confirmBuyBTC").click(function() {
+    console.log("hello hello hello!");
     event.preventDefault();
 
-    // Check if enough money is availiable to buy amount
-    // Need to update values to current user information
-    buyCheck(priceOfBuying, userCash, amountToBuy);
+    // Get user info
+    info = getInfo();
 
-    // Define apiURL
-    var apiURL = "https://api.cryptonator.com/api/ticker/btc-usd";
-    price = axiosGrab(apiURL);
-
-    // Make newBuy object
-    var quantity = $("#btcPurchaseAmt").val().trim();
-    var newBuy = {
-      amount: quantity,
-      cryptoType: "BTC",
-      transactionType: "buy",
-      priceAtSale: price, // Find BTC price
-      totalPrice: price * quantity,
-      createdAt: moment().format("YYYY-MM-DD HH:mm:ss")
-    };
-
-    console.log(newBuy);
-
-    if (!newBuy.amount) {
-      alert("You must enter a valid amount for purchase");
-      return;
-    }
-
-    // Send AJAX POST-request
-    $.post("/api/transactions", newBuy).then(function() {
-      // Successful Buy or Failed to buy
-      console.log("Successful Purchase");
-    });
-
-    // Update User current ownings
+    // Run makeTransaction()
+    makeTransaction(
+      "https://api.cryptonator.com/api/ticker/btc-usd",
+      "buy",
+      "BTC",
+      $("#btcPurchaseAmt")
+        .val()
+        .trim()
+    );
 
     // Empty input box
     $("#btcPurchaseAmt").val("");
+
+    // Close box
+    $("#buyBTC").modal("hide");
+    return false;
   });
-  $("#confirmBuyLTC").on("submit", function(event) {
+  $("#confirmBuyLTC").click(function(event) {
     event.preventDefault();
 
     // Check if enough money is availiable to buy amount
     // Need to update values
     buyCheck(priceOfBuying, userCash, amountToBuy);
 
-    // Define apiURL
-    var apiURL = "https://api.cryptonator.com/api/ticker/ltc-usd";
-    price = axiosGrab(apiURL);
-
-    // Make newBuy object
-    var newBuy = {
-      amount: $("#LTCPurchaseAmt")
+    // Run makeTransaction()
+    makeTransaction(
+      "https://api.cryptonator.com/api/ticker/ltc-usd",
+      "buy",
+      "LTC",
+      $("#LTCPurchaseAmt")
         .val()
-        .trim(),
-      cryptoType: "LTC",
-      transactionType: "buy",
-      priceAtSale: price, // Find LTC price
-      createdAt: moment().format("YYYY-MM-DD HH:mm:ss")
-    };
-
-    console.log(newBuy);
-
-    if (!newBuy.amount) {
-      alert("You must enter a valid amount for purchase");
-      return;
-    }
-
-    // Send AJAX POST-request
-    $.post("/api/transactions", newBuy).then(function() {
-      // Successful Buy or Failed to buy
-    });
-
-    // Update User current ownings
+        .trim()
+    );
 
     // Empty input box
     $("#LTCPurchaseAmt").val("");
   });
-  $("#confirmBuyETH").on("submit", function(event) {
+  $("#confirmBuyETH").click(function(event) {
     event.preventDefault();
 
     // Check if enough money is availiable to buy amount
     // Need to update values
     buyCheck(priceOfBuying, userCash, amountToBuy);
 
-    // Define apiURL
-    var apiURL = "https://api.cryptonator.com/api/ticker/eth-usd";
-    price = axiosGrab(apiURL);
-
-    // Make newBuy object
-    var newBuy = {
-      amount: $("#ETHPurchaseAmt")
+    // Run makeTransaction()
+    makeTransaction(
+      "https://api.cryptonator.com/api/ticker/eth-usd",
+      "buy",
+      "ETH",
+      $("#ETHPurchaseAmt")
         .val()
-        .trim(),
-      cryptoType: "ETH",
-      transactionType: "buy",
-      priceAtSale: price, // Find BTC price
-      createdAt: moment().format("YYYY-MM-DD HH:mm:ss")
-    };
-
-    console.log(newBuy);
-
-    if (!newBuy.amount) {
-      alert("You must enter a valid amount for purchase");
-      return;
-    }
-
-    // Send AJAX POST-request
-    $.post("/api/transactions", newBuy).then(function() {
-      // Successful Buy or Failed to buy
-    });
-
-    // Update User current ownings
+        .trim()
+    );
 
     // Empty input box
     $("#ETHPurchaseAmt").val("");
   });
 
   // Sell option
-  $("#confirmSellBTC").on("submit", function(event) {
+  $("#confirmSellBTC").click(function(event) {
     event.preventDefault();
 
     // Check if enough currency is availiable to sell amount
     // Need to update values
     sellCheck(currencyOwned, amountToBuy);
 
-    // Define apiURL
-    var apiURL = "https://api.cryptonator.com/api/ticker/btc-usd";
-    price = axiosGrab(apiURL);
-
-    // Make new newSell object
-    var newSell = {
-      amount: $("#btcSaleAmt")
+    // Run makeTransaction()
+    makeTransaction(
+      "https://api.cryptonator.com/api/ticker/btc-usd",
+      "sell",
+      "BTC",
+      $("#btcSaleAmt")
         .val()
-        .trim(),
-      cryptoType: "BTC",
-      transactionType: "sell",
-      priceAtSale: price, // Find BTC price
-      createdAt: moment().format("YYYY-MM-DD HH:mm:ss")
-    };
-
-    console.log(newSell);
-
-    if (!newSell.amount) {
-      alert("You must enter a valid amount for purchase");
-      return;
-    }
-
-    // Send AJAX POST-request
-    $.post("/api/transactions", newSell).then(function() {
-      // Successful sell or Failed to sell
-    });
-
-    // Update User current ownings
+        .trim()
+    );
 
     // Empty input box
     $("#btcSaleAmt").val("");
   });
-  $("#confirmSellLTC").on("submit", function(event) {
+  $("#confirmSellLTC").click(function(event) {
     event.preventDefault();
 
     // Check if enough currency is availiable to sell amount
     // Need to update values
     sellCheck(currencyOwned, amountToBuy);
 
-    // Define apiURL
-    var apiURL = "https://api.cryptonator.com/api/ticker/ltc-usd";
-    price = axiosGrab(apiURL);
-
-    // Make new newSell object
-    var newSell = {
-      amount: $("#LTCPurchaseAmtSaleAmt")
+    // Run makeTransaction()
+    makeTransaction(
+      "https://api.cryptonator.com/api/ticker/ltc-usd",
+      "sell",
+      "LTC",
+      $("#LTCSaleAmt")
         .val()
-        .trim(),
-      cryptoType: "LTC",
-      transactionType: "sell",
-      priceAtSale: price, // Find LTC price
-      createdAt: moment().format("YYYY-MM-DD HH:mm:ss")
-    };
-
-    console.log(newSell);
-
-    if (!newSell.amount) {
-      alert("You must enter a valid amount for purchase");
-      return;
-    }
-
-    // Send AJAX POST-request
-    $.post("/api/transactions", newSell).then(function() {
-      // Successful sell or Failed to sell
-    });
-
-    // Update User current ownings
+        .trim()
+    );
 
     // Empty input box
-    $("#LTCPurchaseAmtSaleAmt").val("");
+    $("#LTCSaleAmt").val("");
   });
-  $("#confirmSellETH").on("submit", function(event) {
+  $("#confirmSellETH").click(function(event) {
     event.preventDefault();
 
     // Check if enough currency is availiable to sell amount
     // Need to update values
     sellCheck(currencyOwned, amountToBuy);
 
-    // Define apiURL
-    var apiURL = "https://api.cryptonator.com/api/ticker/eth-usd";
-    price = axiosGrab(apiURL);
-
-    // Make new newSell object
-    var newSell = {
-      amount: $("#ETHPurchaseAmtSaleAmt")
+    // Run makeTransaction()
+    makeTransaction(
+      "https://api.cryptonator.com/api/ticker/eth-usd",
+      "sell",
+      "ETH",
+      $("#ETHSaleAmt")
         .val()
-        .trim(),
-      cryptoType: "ETH",
-      transactionType: "sell",
-      priceAtSale: price, // Find LTC price
-      createdAt: moment().format("YYYY-MM-DD HH:mm:ss")
-    };
-
-    console.log(newSell);
-
-    if (!newSell.amount) {
-      alert("You must enter a valid amount for purchase");
-      return;
-    }
-
-    // Send AJAX POST-request
-    $.post("/api/transactions", newSell).then(function() {
-      // Successful sell or Failed to sell
-    });
-
-    // Update User current ownings
+        .trim()
+    );
 
     // Empty input box
-    $("#ETHPurchaseAmtSaleAmt").val("");
+    $("#ETHSaleAmt").val("");
   });
 
   // Axios API GET function
-  async function axiosGrab(apiURL) {
-    axios.get(apiURL).then(function(response) {
-      let price = response.data.ticker.price;
-      // makeTransaction(price);
-      return price;
+  function axiosGrab(apiURL) {
+    // axios.get(apiURL).then(function(response) {
+    //   return response.data.ticker.price;
+    // });
+    return $.ajax({
+      url: apiURL,
+      method: "GET"
     });
   }
 
   // Display Transaction History
-  $.get("/api/transactions", function(data) {
+  $.get("/api/transactions/all", function(data) {
     // If userId matches foreign key from transaction table
     // Then post their data
     var id = true; // for test purposes
@@ -265,11 +159,11 @@ $(document).ready(function() {
       for (var i = 0; i < data.length; i++) {
         if (data.transactionType === "") {
           var newPost = `
-            <th scope="row">1</th>
+            <th scope="row">${i}</th>
             <td>${data.saleAt}<td>
             <td>${data.amount}<td>
             <td>${data.priceAtSale}<td>
-            <td>${checkType(data.transactionType)}<td>
+            <td>${data.transactionType}<td>
             `;
 
           $("#transaction-history").append(newPost);
@@ -296,87 +190,111 @@ $(document).ready(function() {
   }
 
   // Make Transaction Function
-    //   function makeTransaction(apiURL) {
-    //     if(type === "buy") {
-    //         axiosGrab(apiURL).then(function(response) {
-    //             // Make newBuy object
-    //             let price = response.data.ticker.price;
-    //             var quantity = $("#btcPurchaseAmt").val().trim();
-    //             var newBuy = {
-    //                 amount: quantity,
-    //                 cryptoType: "BTC",
-    //                 transactionType: "buy",
-    //                 priceAtSale: price, // Find BTC price
-    //                 totalPrice: price * quantity,
-    //                 createdAt: moment().format("YYYY-MM-DD HH:mm:ss")
-    //             };
+  function makeTransaction(apiURL, transactionType, cryptoType, quantity) {
+    i = 0;
+    if (transactionType === "buy") {
+      axiosGrab(apiURL).then(function(response) {
+        // Define price
+        price = response.ticker.price;
 
-    //             console.log(newBuy);
+        console.log(price);
+        // Make newBuy object
+        var newBuy = {
+          amount: quantity,
+          cryptoType: cryptoType,
+          transactionType: transactionType,
+          priceAtSale: parseInt(price), // Find BTC price
+          totalPrice: price * quantity,
+          userId: getId(i)
+        };
 
-    //             if (!newBuy.amount) {
-    //             alert("You must enter a valid amount for purchase");
-    //             return;
-    //             }
+        i = i++;
 
-    //             // Send AJAX POST-request
-    //             $.post("/api/transactions", newBuy).then(function() {
-    //             // Successful Buy or Failed to buy
-    //             console.log("Successful Purchase");
-    //             });
+        buyCheck(newSell.priceAtSale, info.cash, newSell.amount);
 
-    //             // Update User current ownings
+        console.log(newBuy);
 
-    //             // Empty input box
-    //             $("#btcPurchaseAmt").val("");  
-    //     });
-    //     } else if (type === "sell") {
-    //         // Make new newSell object
-    //         var newSell = {
-    //             amount: $("#btcSaleAmt")
-    //             .val()
-    //             .trim(),
-    //             cryptoType: "BTC",
-    //             transactionType: "sell",
-    //             priceAtSale: price, // Find BTC price
-    //             createdAt: moment().format("YYYY-MM-DD HH:mm:ss")
-    //         };
+        if (!newBuy.amount) {
+          alert("You must enter a valid amount for purchase");
+          return;
+        } else {
+          // Send AJAX POST-request
+          $.post("/api/transactions/all", newBuy).then(function() {
+            // Successful Buy or Failed to buy
+            console.log("Successful Purchase");
+            return newBuy;
+          });
+        }
 
-    //         console.log(newSell);
+        // Update User current ownings
+      });
+    } else if (transactionType === "sell") {
+      axiosGrab(apiURL).then(function(response) {
+        // Define price
+        price = response.ticker.price;
+        console.log(price);
+        // Make new newSell object
+        var newSell = {
+          amount: quantity,
+          cryptoType: cryptoType,
+          transactionType: transactionType,
+          priceAtSale: parseInt(price), // Find BTC price
+          totalPrice: price * quantity
+        };
+        i = i++;
 
-    //         if (!newSell.amount) {
-    //             alert("You must enter a valid amount for purchase");
-    //             return;
-    //         }
+        var info = getInfo()
+        // Check if enough money is availiable to buy amount
+        // Need to update values to current user information
+        sellCheck(info.btcOwned, newSell.amount);
+        console.log(newSell);
 
-    //         // Send AJAX POST-request
-    //         $.post("/api/transactions", newSell).then(function() {
-    //             // Successful sell or Failed to sell
-    //         });
+        if (!newSell.amount) {
+          alert("You must enter a valid amount for purchase");
+          return;
+        } else {
+          // Send AJAX POST-request
+          $.post("/api/transactions/all", newSell).then(function() {
+            // Successful Buy or Failed to buy
+            console.log("Successful Sale");
+            return newSell;
+          });
+        }
+        // Update User current ownings
+      });
+    } else {
+      return console.error("Illegal");
+    }
+  }
 
-    //         // Update User current ownings
+  // UserId request function
+  function getId(i) {
+    $.ajax({
+      url: "/api/users",
+      method: "GET"
+    }).then(function(request) {
+      console.log(request[i].userId);
+      return request[i].userId;
+    });
+  }
 
-    //         // Empty input box
-    //         $("#btcSaleAmt").val("");
-    //     } else {
-    //         return console.error("Illegal");   
-    //     }
-        
-    //   }
+  // Get info
+  function getInfo() {
+    $.ajax({
+      url: "/api/users",
+      method: "GET"
+    }).then(function(request) {
+      var req = request[0];
+      console.log(req);
+      return (info = {
+        btcOwned: req.bitcoin,
+        ltcOwned: req.litecoin,
+        ethOwned: req.ethereum,
+        cash: req.cash,
+        id: req.userId
+      });
+    });
+  }
 
-
-      // Determine currency type
-//   function checkType(type) {
-//     if (type === "BTC") {
-//       var apiURL = "https://api.cryptonator.com/api/ticker/btc-usd";
-//       return (price = axiosGrab(apiURL));
-//     } else if (type === "LTC") {
-//       var apiURL = "https://api.cryptonator.com/api/ticker/ltc-usd";
-//       return (price = axiosGrab(apiURL));
-//     } else if (type === "ETH") {
-//       var apiURL = "https://api.cryptonator.com/api/ticker/eth-usd";
-//       return (price = axiosGrab(apiURL));
-//     }
-//   }
-
+  // End Document.ready
 });
-

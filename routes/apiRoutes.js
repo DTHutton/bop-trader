@@ -9,49 +9,63 @@ module.exports = function(app) {
 
   // Get all users
   app.get("/api/users", function(req, res) {
-    db.User.findAll({}).then(function(dbUser) {
+    db.user.findAll({}).then(function(dbUser) {
       res.json(dbUser);
     });
   });
 
-  // Get all buy transaction data
-  app.get("/api/buy-transactions", function(req, res) {
-    db.BuyTransactions.findAll({}).then(function(dbUser) {
-      res.json(dbUser);
+  // Get transaction data for current user
+  // app.get("/api/transactions/:id", function(req, res) {
+  //   console.log(
+  //     "\n from db.user model >> /api/transactions >> req.user = ",
+  //     req.user
+  //   );
+  //   // USER MODEL NOT TRANSACTIONS FOR NOW
+  //   // db.User.findAll({ where: { userId: req.user.userId } }).then(function(
+  //   //   transactions
+  //   // ) {
+  //   //   res.json(transactions);
+  //   // });
+  //   db.user.findAll({}).then(function(transactions) {
+  //     res.json(transactions);
+  //   });
+  // });
+
+  // Get all transactions
+  app.get("/api/transactions/all", function(req, res) {
+    console.log("\n/api/transactions/all\n");
+    db.Transactions.findAll({}).then(function(transactions) {
+      res.json(transactions);
     });
   });
 
-  // Get all sell transaction data
-  app.get("/api/sell-transactions", function(req, res) {
-    db.SellTransactions.findAll({}).then(function(dbUser) {
+  // Get all transactions
+  app.get("/api/transactions", function(req, res) {
+    db.Transactions.findAll({}).then(function(transactions) {
+      res.json(transactions);
+    });
+  });
+
+  // Post all buy transaction data
+  app.post("/api/transactions/all", function(req, res) {
+    db.Transactions.create(req.body).then(function(dbUser) {
       res.json(dbUser);
     });
   });
 
   // Create a new user
   app.post("/api/users", function(req, res) {
-    db.User.create(req.body).then(function(dbUser) {
+    db.user.create(req.body).then(function(dbUser) {
       res.json(dbUser);
     });
   });
 
   // Delete a user by userId
   app.delete("/api/users/:userId", function(req, res) {
-    db.User.destroy({ where: { userId: req.params.userId } }).then(function(
-      dbUser
-    ) {
-      res.json(dbUser);
-    });
+    db.user
+      .destroy({ where: { userId: req.params.userId } })
+      .then(function(dbUser) {
+        res.json(dbUser);
+      });
   });
 };
-
-// POST route for saving a newUser
-// app.post("posts", function(req, res) {
-//   console.log("posts  HIT >> req.body = ", req.body);
-//   db.User.create({
-//     email: req.body.email,
-//     password: req.body.password
-//   }).then(function(newUser) {
-//     res.json(newUser);
-//   });
-// });
