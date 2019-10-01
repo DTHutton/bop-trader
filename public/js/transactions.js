@@ -16,8 +16,8 @@ $(document).ready(function() {
     console.log("hello hello hello!");
     event.preventDefault();
 
-    // Get user info
-    info = getInfo();
+    // // Get user info
+    // info = getInfo();
 
     // Run makeTransaction()
     makeTransaction(
@@ -41,7 +41,7 @@ $(document).ready(function() {
 
     // Check if enough money is availiable to buy amount
     // Need to update values
-    buyCheck(priceOfBuying, userCash, amountToBuy);
+    // buyCheck(priceOfBuying, userCash, amountToBuy);
 
     // Run makeTransaction()
     makeTransaction(
@@ -61,7 +61,7 @@ $(document).ready(function() {
 
     // Check if enough money is availiable to buy amount
     // Need to update values
-    buyCheck(priceOfBuying, userCash, amountToBuy);
+    // buyCheck(priceOfBuying, userCash, amountToBuy);
 
     // Run makeTransaction()
     makeTransaction(
@@ -83,7 +83,7 @@ $(document).ready(function() {
 
     // Check if enough currency is availiable to sell amount
     // Need to update values
-    sellCheck(currencyOwned, amountToBuy);
+    // sellCheck(currencyOwned, amountToBuy);
 
     // Run makeTransaction()
     makeTransaction(
@@ -103,7 +103,7 @@ $(document).ready(function() {
 
     // Check if enough currency is availiable to sell amount
     // Need to update values
-    sellCheck(currencyOwned, amountToBuy);
+    // sellCheck(currencyOwned, amountToBuy);
 
     // Run makeTransaction()
     makeTransaction(
@@ -123,7 +123,7 @@ $(document).ready(function() {
 
     // Check if enough currency is availiable to sell amount
     // Need to update values
-    sellCheck(currencyOwned, amountToBuy);
+    // sellCheck(currencyOwned, amountToBuy);
 
     // Run makeTransaction()
     makeTransaction(
@@ -210,7 +210,7 @@ $(document).ready(function() {
 
         i = i++;
 
-        buyCheck(newBuy.priceAtSale, info.cash, newBuy.amount);
+        // buyCheck(newBuy.priceAtSale, info.cash, newBuy.amount);
 
         console.log(newBuy);
 
@@ -243,11 +243,11 @@ $(document).ready(function() {
         };
         i = i++;
 
-        var info = getInfo()
+        // var info = getInfo()
         // Check if enough money is availiable to buy amount
         // Need to update values to current user information
-        sellCheck(info.btcOwned, newSell.amount);
-        console.log(newSell);
+        // sellCheck(info.btcOwned, newSell.amount);
+        // console.log(newSell);
 
         if (!newSell.amount) {
           alert("You must enter a valid amount for purchase");
