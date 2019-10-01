@@ -14,9 +14,30 @@ module.exports = function(app) {
     });
   });
 
-  // Get all buy transaction data
+  // Get transaction data for current user
   app.get("/api/transactions", function(req, res) {
-    db.Transactions.findAll({}).then(function(dbUser) {
+    console.log(
+      "\n from db.user model >> /api/transactions >> req.user = ",
+      req.user
+    );
+  // USER MODEL NOT TRANSACTIONS FOR NOW
+  db.user
+    .findAll({ where: { userId: req.user.userId } })
+    .then(function(transactions) {
+      res.json(transactions);
+    });
+  });
+
+  // Get all transactions
+  app.get("/api/transactions/all", function(req, res) {
+    console.log("\n/api/transactions/all\n");
+    db.Transactions.findAll({}).then(function(transactions) {
+      res.json(transactions);
+  });
+
+  // Get all buy transaction data
+  app.post("/api/transactions", function(req, res) {
+    db.Transactions.create(req.body).then(function(dbUser) {
       res.json(dbUser);
     });
   });
