@@ -16,9 +16,8 @@ $(document).ready(function() {
     console.log("hello hello hello!");
     event.preventDefault();
 
-    // Check if enough money is availiable to buy amount
-    // Need to update values to current user information
-    buyCheck(priceOfBuying, userCash, amountToBuy);
+    // Get user info
+    info = getInfo();
 
     // Run makeTransaction()
     makeTransaction(
@@ -211,6 +210,8 @@ $(document).ready(function() {
 
         i = i++;
 
+        buyCheck(newSell.priceAtSale, info.cash, newSell.amount);
+
         console.log(newBuy);
 
         if (!newBuy.amount) {
@@ -228,33 +229,39 @@ $(document).ready(function() {
         // Update User current ownings
       });
     } else if (transactionType === "sell") {
-      // Define price
-      price = response.ticker.price;
-      console.log(price);
-      // Make new newSell object
-      var newSell = {
-        amount: quantity,
-        cryptoType: cryptoType,
-        transactionType: transactionType,
-        priceAtSale: parseInt(price), // Find BTC price
-        totalPrice: price * quantity
-      };
-      i = i++;
+      axiosGrab(apiURL).then(function(response) {
+        // Define price
+        price = response.ticker.price;
+        console.log(price);
+        // Make new newSell object
+        var newSell = {
+          amount: quantity,
+          cryptoType: cryptoType,
+          transactionType: transactionType,
+          priceAtSale: parseInt(price), // Find BTC price
+          totalPrice: price * quantity
+        };
+        i = i++;
 
-      console.log(newSell);
+        var info = getInfo()
+        // Check if enough money is availiable to buy amount
+        // Need to update values to current user information
+        sellCheck(info.btcOwned, newSell.amount);
+        console.log(newSell);
 
-      if (!newSell.amount) {
-        alert("You must enter a valid amount for purchase");
-        return;
-      } else {
-        // Send AJAX POST-request
-        $.post("/api/transactions/all", newSell).then(function() {
-          // Successful Buy or Failed to buy
-          console.log("Successful Sale");
-          return newSell;
-        });
-      }
-      // Update User current ownings
+        if (!newSell.amount) {
+          alert("You must enter a valid amount for purchase");
+          return;
+        } else {
+          // Send AJAX POST-request
+          $.post("/api/transactions/all", newSell).then(function() {
+            // Successful Buy or Failed to buy
+            console.log("Successful Sale");
+            return newSell;
+          });
+        }
+        // Update User current ownings
+      });
     } else {
       return console.error("Illegal");
     }
@@ -268,6 +275,24 @@ $(document).ready(function() {
     }).then(function(request) {
       console.log(request[i].userId);
       return request[i].userId;
+    });
+  }
+
+  // Get info
+  function getInfo() {
+    $.ajax({
+      url: "/api/users",
+      method: "GET"
+    }).then(function(request) {
+      var req = request[0];
+      console.log(req);
+      return (info = {
+        btcOwned: req.bitcoin,
+        ltcOwned: req.litecoin,
+        ethOwned: req.ethereum,
+        cash: req.cash,
+        id: req.userId
+      });
     });
   }
 

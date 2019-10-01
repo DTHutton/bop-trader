@@ -29,15 +29,15 @@ module.exports = function(sequelize, DataTypes) {
     },
     bitcoin: {
       type: DataTypes.INTEGER,
-      defaultValue: 1
+      defaultValue: 5
     },
     ethereum: {
       type: DataTypes.INTEGER,
-      defaultValue: 0
+      defaultValue: 5
     },
     litecoin: {
       type: DataTypes.INTEGER,
-      defaultValue: 0
+      defaultValue: 5
     },
     createdAt: {
       type: DataTypes.DATE,
