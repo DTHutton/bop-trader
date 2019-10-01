@@ -12,7 +12,6 @@ $(document).ready(function() {
   console.log("Hello!");
 
   // Buy option
-
   $("#confirmBuyBTC").click(function() {
     console.log("hello hello hello!");
     event.preventDefault();
