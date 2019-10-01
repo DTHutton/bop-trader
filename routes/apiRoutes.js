@@ -15,15 +15,8 @@ module.exports = function(app) {
   });
 
   // Get all buy transaction data
-  app.get("/api/buy-transactions", function(req, res) {
-    db.BuyTransactions.findAll({}).then(function(dbUser) {
-      res.json(dbUser);
-    });
-  });
-
-  // Get all sell transaction data
-  app.get("/api/sell-transactions", function(req, res) {
-    db.SellTransactions.findAll({}).then(function(dbUser) {
+  app.get("/api/transactions", function(req, res) {
+    db.Transactions.findAll({}).then(function(dbUser) {
       res.json(dbUser);
     });
   });

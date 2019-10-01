@@ -20,7 +20,7 @@ module.exports = function(sequelize, DataTypes) {
         len: [1, 30]
       }
     },
-    transactionAt: {
+    transactionType: {
       type: DataTypes.STRING,
       required: true,
       allowNull: false,
@@ -36,7 +36,23 @@ module.exports = function(sequelize, DataTypes) {
         len: [1, 30]
       }
     },
+    totalPrice: {
+      type: DataTypes.INTEGER,
+      required: true,
+      allowNull: false,
+      validate: {
+        len: [1, 30]
+      }
+    },
     saleAt: {
+      type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW
+    },
+    createdAt: {
+      type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW
+    },
+    updatedAt: {
       type: DataTypes.DATE,
       defaultValue: DataTypes.NOW
     }
