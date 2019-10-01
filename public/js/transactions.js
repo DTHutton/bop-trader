@@ -210,7 +210,7 @@ $(document).ready(function() {
 
         i = i++;
 
-        buyCheck(newSell.priceAtSale, info.cash, newSell.amount);
+        buyCheck(newBuy.priceAtSale, info.cash, newBuy.amount);
 
         console.log(newBuy);
 
