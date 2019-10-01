@@ -19,7 +19,7 @@ CREATE TABLE User
 
 CREATE TABLE Transactions
 (
-	id int AUTO_INCREMENT NOT NULL,
+	id int AUTO_INCREMENT PRIMARY KEY,
     amount INT,
     cryptoType VARCHAR(255),
     transactionType VARCHAR(255),
@@ -27,18 +27,15 @@ CREATE TABLE Transactions
     totalPrice INT,
     saleAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     createdAt DATETIME,
-    updatedAt DATETIME,
-    idKey INT,
-	PRIMARY KEY (id),
-    FOREIGN KEY (idKey) REFERENCES User(userId)
+    updatedAt DATETIME
 );
 
 INSERT INTO User (email, password, cash, bitcoin, ethereum, litecoin)
 VALUES ("aa@gmail.com", "gg", 10000, 5, 5, 5);
 
-INSERT INTO Transactions (amount, cryptoType, transactionType, priceAtSale, totalPrice, userId)
+INSERT INTO Transactions (amount, cryptoType, transactionType, priceAtSale, totalPrice, idKey)
 VALUES (5, "BTC", "buy", 8074.49817746, 40372.4908, 1);
-INSERT INTO Transactions (amount, cryptoType, transactionType, priceAtSale, totalPrice, userId)
+INSERT INTO Transactions (amount, cryptoType, transactionType, priceAtSale, totalPrice, idKey)
 VALUES (5, "BTC", "sell", 8075.49817746, 40377.4908, 1);
 
 SELECT * FROM `bop_db`.`User` LIMIT 1000;

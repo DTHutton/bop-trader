@@ -4,7 +4,6 @@
 // sequelize.define returns an object, which we store inside the variable “User”. We return this User variable at the end.
 
 // Sequelize will pluralize our table names by default, so always name your models in the singular.
-const User = require('../models/user');
 
 module.exports = function(sequelize, DataTypes) {
   var Transactions = sequelize.define("Transactions", {
@@ -56,13 +55,6 @@ module.exports = function(sequelize, DataTypes) {
     updatedAt: {
       type: DataTypes.DATE,
       defaultValue: DataTypes.NOW
-    },
-    idKey: {
-      type: DataTypes.INTEGER,
-      references: {
-        model: User,
-        key: "userId"
-      }
     }
   });
 

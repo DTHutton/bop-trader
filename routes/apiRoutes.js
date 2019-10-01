@@ -20,10 +20,10 @@ module.exports = function(app) {
       "\n from db.user model >> /api/transactions >> req.user = ",
       req.user
     );
-  // USER MODEL NOT TRANSACTIONS FOR NOW
-  db.user
-    .findAll({ where: { userId: req.user.userId } })
-    .then(function(transactions) {
+    // USER MODEL NOT TRANSACTIONS FOR NOW
+    db.User.findAll({ where: { userId: req.user.userId } }).then(function(
+      transactions
+    ) {
       res.json(transactions);
     });
   });
@@ -33,6 +33,7 @@ module.exports = function(app) {
     console.log("\n/api/transactions/all\n");
     db.Transactions.findAll({}).then(function(transactions) {
       res.json(transactions);
+    });
   });
 
   // Get all buy transaction data
@@ -58,14 +59,3 @@ module.exports = function(app) {
     });
   });
 };
-
-// POST route for saving a newUser
-// app.post("posts", function(req, res) {
-//   console.log("posts  HIT >> req.body = ", req.body);
-//   db.User.create({
-//     email: req.body.email,
-//     password: req.body.password
-//   }).then(function(newUser) {
-//     res.json(newUser);
-//   });
-// });
