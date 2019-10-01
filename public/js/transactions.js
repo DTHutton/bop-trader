@@ -18,16 +18,16 @@ $(document).ready(function() {
 
     // Define apiURL
     var apiURL = "https://api.cryptonator.com/api/ticker/btc-usd";
-    var price = axiosGrab(apiURL);
+    price = axiosGrab(apiURL);
 
     // Make newBuy object
+    var quantity = $("#btcPurchaseAmt").val().trim();
     var newBuy = {
-      amount: $("#btcPurchaseAmt")
-        .val()
-        .trim(),
+      amount: quantity,
       cryptoType: "BTC",
       transactionType: "buy",
       priceAtSale: price, // Find BTC price
+      totalPrice: price * quantity,
       createdAt: moment().format("YYYY-MM-DD HH:mm:ss")
     };
 
@@ -58,7 +58,7 @@ $(document).ready(function() {
 
     // Define apiURL
     var apiURL = "https://api.cryptonator.com/api/ticker/ltc-usd";
-    var price = axiosGrab(apiURL);
+    price = axiosGrab(apiURL);
 
     // Make newBuy object
     var newBuy = {
@@ -97,7 +97,7 @@ $(document).ready(function() {
 
     // Define apiURL
     var apiURL = "https://api.cryptonator.com/api/ticker/eth-usd";
-    var price = axiosGrab(apiURL);
+    price = axiosGrab(apiURL);
 
     // Make newBuy object
     var newBuy = {
@@ -138,7 +138,7 @@ $(document).ready(function() {
 
     // Define apiURL
     var apiURL = "https://api.cryptonator.com/api/ticker/btc-usd";
-    var price = axiosGrab(apiURL);
+    price = axiosGrab(apiURL);
 
     // Make new newSell object
     var newSell = {
@@ -177,7 +177,7 @@ $(document).ready(function() {
 
     // Define apiURL
     var apiURL = "https://api.cryptonator.com/api/ticker/ltc-usd";
-    var price = axiosGrab(apiURL);
+    price = axiosGrab(apiURL);
 
     // Make new newSell object
     var newSell = {
@@ -216,7 +216,7 @@ $(document).ready(function() {
 
     // Define apiURL
     var apiURL = "https://api.cryptonator.com/api/ticker/eth-usd";
-    var price = axiosGrab(apiURL);
+    price = axiosGrab(apiURL);
 
     // Make new newSell object
     var newSell = {
@@ -248,9 +248,10 @@ $(document).ready(function() {
   });
 
   // Axios API GET function
-  function axiosGrab(apiURL) {
+  async function axiosGrab(apiURL) {
     axios.get(apiURL).then(function(response) {
-      var price = response.data.ticker.price;
+      let price = response.data.ticker.price;
+      // makeTransaction(price);
       return price;
     });
   }
@@ -279,20 +280,6 @@ $(document).ready(function() {
     }
   });
 
-  // Determine currency type
-  function checkType(type) {
-    if (type === "BTC") {
-      var apiURL = "https://api.cryptonator.com/api/ticker/btc-usd";
-      return (price = axiosGrab(apiURL));
-    } else if (type === "LTC") {
-      var apiURL = "https://api.cryptonator.com/api/ticker/ltc-usd";
-      return (price = axiosGrab(apiURL));
-    } else if (type === "ETH") {
-      var apiURL = "https://api.cryptonator.com/api/ticker/eth-usd";
-      return (price = axiosGrab(apiURL));
-    }
-  }
-
   // Buy Check
   function buyCheck(priceOfBuying, userCash, amountToBuy) {
     if (priceOfBuying > userCash * amountToBuy) {
@@ -307,4 +294,89 @@ $(document).ready(function() {
       );
     }
   }
+
+  // Make Transaction Function
+    //   function makeTransaction(apiURL) {
+    //     if(type === "buy") {
+    //         axiosGrab(apiURL).then(function(response) {
+    //             // Make newBuy object
+    //             let price = response.data.ticker.price;
+    //             var quantity = $("#btcPurchaseAmt").val().trim();
+    //             var newBuy = {
+    //                 amount: quantity,
+    //                 cryptoType: "BTC",
+    //                 transactionType: "buy",
+    //                 priceAtSale: price, // Find BTC price
+    //                 totalPrice: price * quantity,
+    //                 createdAt: moment().format("YYYY-MM-DD HH:mm:ss")
+    //             };
+
+    //             console.log(newBuy);
+
+    //             if (!newBuy.amount) {
+    //             alert("You must enter a valid amount for purchase");
+    //             return;
+    //             }
+
+    //             // Send AJAX POST-request
+    //             $.post("/api/transactions", newBuy).then(function() {
+    //             // Successful Buy or Failed to buy
+    //             console.log("Successful Purchase");
+    //             });
+
+    //             // Update User current ownings
+
+    //             // Empty input box
+    //             $("#btcPurchaseAmt").val("");  
+    //     });
+    //     } else if (type === "sell") {
+    //         // Make new newSell object
+    //         var newSell = {
+    //             amount: $("#btcSaleAmt")
+    //             .val()
+    //             .trim(),
+    //             cryptoType: "BTC",
+    //             transactionType: "sell",
+    //             priceAtSale: price, // Find BTC price
+    //             createdAt: moment().format("YYYY-MM-DD HH:mm:ss")
+    //         };
+
+    //         console.log(newSell);
+
+    //         if (!newSell.amount) {
+    //             alert("You must enter a valid amount for purchase");
+    //             return;
+    //         }
+
+    //         // Send AJAX POST-request
+    //         $.post("/api/transactions", newSell).then(function() {
+    //             // Successful sell or Failed to sell
+    //         });
+
+    //         // Update User current ownings
+
+    //         // Empty input box
+    //         $("#btcSaleAmt").val("");
+    //     } else {
+    //         return console.error("Illegal");   
+    //     }
+        
+    //   }
+
+
+      // Determine currency type
+//   function checkType(type) {
+//     if (type === "BTC") {
+//       var apiURL = "https://api.cryptonator.com/api/ticker/btc-usd";
+//       return (price = axiosGrab(apiURL));
+//     } else if (type === "LTC") {
+//       var apiURL = "https://api.cryptonator.com/api/ticker/ltc-usd";
+//       return (price = axiosGrab(apiURL));
+//     } else if (type === "ETH") {
+//       var apiURL = "https://api.cryptonator.com/api/ticker/eth-usd";
+//       return (price = axiosGrab(apiURL));
+//     }
+//   }
+
 });
+
