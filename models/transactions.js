@@ -7,6 +7,11 @@
 
 module.exports = function(sequelize, DataTypes) {
   var Transactions = sequelize.define("Transactions", {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true
+    },
     amount: {
       type: DataTypes.INTEGER,
       required: true,
@@ -55,18 +60,17 @@ module.exports = function(sequelize, DataTypes) {
     updatedAt: {
       type: DataTypes.DATE,
       defaultValue: DataTypes.NOW
+    },
+    userId: {
+      type: DataTypes.INTEGER
     }
   });
 
-  Transactions.associate = function(models) {
-    // We're saying that a Transactions should belong to an User
-    // A Transactions can't be created without an User due to the foreign key constraint
-    Transactions.belongsTo(models.user, {
-      foreignKey: {
-        allowNull: false
-      }
-    });
-  };
+  // Transactions.associate = function(models) {
+  //   // We're saying that a Transactions should belong to an User
+  //   // A Transactions can't be created without an User due to the foreign key constraint
+  //   Transactions.belongsTo(models.user, {});
+  // };
 
   return Transactions;
 };

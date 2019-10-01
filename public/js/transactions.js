@@ -7,6 +7,7 @@ $(document).ready(function() {
   var userCash = 100000;
   var amountToBuy = 5;
   var currencyOwned = 2;
+  var i = 0;
 
   console.log("Hello!");
 
@@ -152,7 +153,7 @@ $(document).ready(function() {
   }
 
   // Display Transaction History
-  $.get("/api/transactions", function(data) {
+  $.get("/api/transactions/all", function(data) {
     // If userId matches foreign key from transaction table
     // Then post their data
     var id = true; // for test purposes
@@ -192,10 +193,12 @@ $(document).ready(function() {
 
   // Make Transaction Function
   function makeTransaction(apiURL, transactionType, cryptoType, quantity) {
+    i = 0;
     if (transactionType === "buy") {
       axiosGrab(apiURL).then(function(response) {
         // Define price
         price = response.ticker.price;
+
         console.log(price);
         // Make newBuy object
         var newBuy = {
@@ -203,8 +206,11 @@ $(document).ready(function() {
           cryptoType: cryptoType,
           transactionType: transactionType,
           priceAtSale: parseInt(price), // Find BTC price
-          totalPrice: price * quantity
+          totalPrice: price * quantity,
+          userId: getId(i)
         };
+
+        i = i++;
 
         console.log(newBuy);
 
@@ -213,7 +219,7 @@ $(document).ready(function() {
           return;
         } else {
           // Send AJAX POST-request
-          $.post("/api/transactions", newBuy).then(function() {
+          $.post("/api/transactions/all", newBuy).then(function() {
             // Successful Buy or Failed to buy
             console.log("Successful Purchase");
             return newBuy;
@@ -234,6 +240,7 @@ $(document).ready(function() {
         priceAtSale: parseInt(price), // Find BTC price
         totalPrice: price * quantity
       };
+      i = i++;
 
       console.log(newSell);
 
@@ -242,7 +249,7 @@ $(document).ready(function() {
         return;
       } else {
         // Send AJAX POST-request
-        $.post("/api/transactions", newSell).then(function() {
+        $.post("/api/transactions/all", newSell).then(function() {
           // Successful Buy or Failed to buy
           console.log("Successful Sale");
           return newSell;
@@ -253,4 +260,17 @@ $(document).ready(function() {
       return console.error("Illegal");
     }
   }
+
+  // UserId request function
+  function getId(i) {
+    $.ajax({
+      url: "/api/users",
+      method: "GET"
+    }).then(function(request) {
+      console.log(request[i].userId);
+      return request[i].userId;
+    });
+  }
+
+  // End Document.ready
 });
