@@ -29,15 +29,15 @@ module.exports = function(sequelize, DataTypes) {
     },
     bitcoin: {
       type: DataTypes.INTEGER,
-      defaultValue: 1
+      defaultValue: 5
     },
     ethereum: {
       type: DataTypes.INTEGER,
-      defaultValue: 0
+      defaultValue: 5
     },
     litecoin: {
       type: DataTypes.INTEGER,
-      defaultValue: 0
+      defaultValue: 5
     },
     createdAt: {
       type: DataTypes.DATE,
@@ -62,5 +62,12 @@ module.exports = function(sequelize, DataTypes) {
   //   user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(10), null);
   // });
   // return User;
+
+  // User.associate = function(models) {
+  //   // Associating User with Transactions
+  //   // When an User is deleted, also delete any associated Transactions
+  //   User.hasMany(models.Transactions);
+  // };
+
   return User;
 };
